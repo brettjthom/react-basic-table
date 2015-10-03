@@ -1,5 +1,3 @@
-"use strict";
-
 class SimpleTable extends React.Component {
     constructor(props) {
         super(props);
