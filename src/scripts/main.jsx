@@ -15,16 +15,6 @@ class SimpleTable extends React.Component {
         this.setState({ numPages: Math.ceil(this.props.rows.length / this.props.pageSize) });
     }
 
-    nextPage() {
-        if (this.state.page < this.state.numPages)
-            this.setState({ page: (this.state.page + 1) });
-    }
-
-    previousPage() {
-        if (this.state.page > 1)
-            this.setState({ page: (this.state.page - 1) });
-    }
-
     setPage(newPage) {
         this.setState({ page: newPage });
     }
@@ -46,17 +36,6 @@ class SimpleTable extends React.Component {
             );
         });
 
-        var previousClass = classNames("paginate_button", "previous", { "disabled": this.state.page == 1 });
-        var nextClass = classNames("paginate_button", "next", { "disabled": this.state.page == this.state.numPages });
-        var paging = 
-            <ul className="pagination">
-                <li className={previousClass} onClick={this.previousPage.bind(this)}>
-                    <a href="#">Previous</a>
-                </li>
-                <li className={nextClass} onClick={this.nextPage.bind(this)}>
-                    <a href="#">Next</a>
-                </li>
-            </ul>
         return (
             <div>
                 <div className="row">
@@ -73,16 +52,10 @@ class SimpleTable extends React.Component {
                         </table>
                     </div>
                 </div>
-                <div classNameName="row">
-                    <div className="col-xs-12">
-                        <div className="dataTables_paginate paging_simple_numbers">
-                            {paging}
-                        </div>
-                    </div>
-                </div>
+                <SimpleTablePaging numPages={this.state.numPages} page={this.state.page} setPage={this.setPage.bind(this)} />
             </div>
         );
     }
 }
 
-SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 5 }
+SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10 }
