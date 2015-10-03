@@ -16,6 +16,7 @@ gulp.task('example', function() {
 gulp.task('scripts', function() {
   gulp.src('./src/scripts/*.jsx')
   	.pipe(react())
+    .pipe(babel())
     .pipe(concat('SimpleTable.js'))
     .pipe(stripDebug())
     .pipe(gulp.dest('./build/scripts/'));
