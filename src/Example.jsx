@@ -39,122 +39,28 @@ var rows = [
 		<td>
 		    <input type="text" />
 		</td>         
-	],
-	[
-		<td>Row6</td>,
-		<td>Row6</td>,
-		<td>Row6</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row7</td>,
-		<td>Row7</td>,
-		<td>Row7</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row8</td>,
-		<td>Row8</td>,
-		<td>Row8</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row9</td>,
-		<td>Row9</td>,
-		<td>Row9</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row10</td>,
-		<td>Row10</td>,
-		<td>Row10</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row11</td>,
-		<td>Row11</td>,
-		<td>Row11</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row12</td>,
-		<td>Row12</td>,
-		<td>Row12</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row13</td>,
-		<td>Row13</td>,
-		<td>Row13</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row14</td>,
-		<td>Row14</td>,
-		<td>Row14</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row15</td>,
-		<td>Row15</td>,
-		<td>Row15</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row16</td>,
-		<td>Row16</td>,
-		<td>Row16</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row17</td>,
-		<td>Row17</td>,
-		<td>Row17</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row18</td>,
-		<td>Row18</td>,
-		<td>Row18</td>,
-		<td>
-		    <input type="text" />
-		</td>         
-	],
-	[
-		<td>Row19</td>,
-		<td>Row19</td>,
-		<td>Row19</td>,
-		<td>
-		    <input type="text" />
-		</td>         
 	]
 ]
 
 React.render(
   <SimpleTable columns={columns} rows={rows} />,
-  document.getElementById('tableTest')
+  document.getElementById('Example1')
+);
+
+var i = 0;
+var rows = [];
+for (i = 0; i <= 2000; i++){
+	var item = [
+		<td>{"Row"+i}</td>,
+		<td>{i*2}</td>,
+		<td>{i*3}</td>,
+		<td>{i*4}</td>
+	];
+
+	rows.push(item);
+}
+
+React.render(
+  <SimpleTable columns={columns} rows={rows} />,
+  document.getElementById('Example2')
 );

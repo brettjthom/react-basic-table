@@ -30,9 +30,9 @@ gulp.task('styles', function() {
 
 gulp.task('dependencies', function() {
    gulp.src([
-   	'./node_modules/bootstrap/dist/css/bootstrap.min.css', 
-   	'./node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
-   	'./node_modules/react/dist/react.min.js',
+   	'./node_modules/bootstrap/dist/css/bootstrap.css', 
+   	'./node_modules/bootstrap/dist/css/bootstrap-theme.css',
+   	'./node_modules/react/dist/react.js',
    	'./node_modules/classnames/index.js'])
 	.pipe(gulp.dest('./build/dependencies/'));
 })
