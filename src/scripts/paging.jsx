@@ -7,26 +7,26 @@ class SimpleTablePaging extends React.Component {
         }
     }
 
-    nextPage() {
-        if (this.props.page < this.props.numPages)
+    nextPage(e) {
+        if (this.props.page < this.props.numPages && this.props.numPages > 0)
             this.props.setPage(this.props.page + 1);
-       	return false;
+       	e.preventDefault();
     }
 
-    previousPage() {
+    previousPage(e) {
 		if (this.props.page > 1)
 			this.props.setPage(this.props.page - 1);
-		return false;
+		e.preventDefault();
     }
 
-    setPage(page) {
+    setPage(page, e) {
 		this.props.setPage(page);
-		return false;
+		e.preventDefault();
     }
 
     render() {
     	var previousClass = classNames("paginate_button", "previous", { "disabled": this.props.page == 1 });
-        var nextClass = classNames("paginate_button", "next", { "disabled": this.props.page == this.props.numPages });
+        var nextClass = classNames("paginate_button", "next", { "disabled": this.props.page == this.props.numPages || this.props.numPages == 0 });
 
         // Create individual numbers
         var i = 1;
@@ -38,13 +38,13 @@ class SimpleTablePaging extends React.Component {
         	var numberClassName = classNames("paginate_button", {"disabled": this.props.page == i});
         	if (lastNumberAdded !== null && lastNumberAdded !== i - 1)
 	        	pagingNumbers.push(
-		            <li className="paginate_button disabled">
+		            <li key={"paging-...-" + i} className="paginate_button disabled">
 		                <a href="#" onClick={this.setPage.bind(this, i)}>...</a>
 		            </li>
 	            );    
 
         	pagingNumbers.push(
-	            <li className={numberClassName}>
+	            <li key={"paging-" + i} className={numberClassName}>
 	                <a href="#" onClick={this.setPage.bind(this, i)}>{i}</a>
 	            </li>
             );
@@ -54,11 +54,11 @@ class SimpleTablePaging extends React.Component {
 
         var paging = 
             <ul className="pagination">
-                <li className={previousClass}>
+                <li key="paging-previous" className={previousClass}>
                     <a href="#" onClick={this.previousPage.bind(this)}>Previous</a>
                 </li>
                 {pagingNumbers}
-                <li className={nextClass}>
+                <li key="paging-next" className={nextClass}>
                     <a href="#" onClick={this.nextPage.bind(this)}>Next</a>
                 </li>
             </ul>

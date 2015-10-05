@@ -9,13 +9,12 @@ gulp.task('example', function() {
   gulp.src('./src/Example.html')
     .pipe(gulp.dest('./build'));
   gulp.src('./src/Example.jsx')
-    .pipe(react())
+    .pipe(babel())
     .pipe(gulp.dest('./build'));
 });
 
 gulp.task('scripts', function() {
-  gulp.src('./src/scripts/*.jsx')
-  	.pipe(react())
+  gulp.src(['./src/scripts/*.jsx','./src/scripts/*.js'])
     .pipe(babel())
     .pipe(concat('SimpleTable.js'))
     .pipe(stripDebug())
