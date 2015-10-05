@@ -48,7 +48,9 @@ var SimpleTable = (function (_React$Component) {
             if (nextProps.filter.length > 0 && nextProps.rows.length > 0) displayRows = filterTable(nextProps.rows, nextProps.filter);
             this.setState({ displayRows: displayRows });
             this.setState({ numPages: Math.ceil(displayRows.length / nextProps.pageSize) });
-            this.setState({ page: 1 });
+            if (!_.isEqual(this.props.filter, nextProps.filter)) {
+                this.setState({ page: 1 });
+            }
         }
     }, {
         key: "componentWillMount",
@@ -72,28 +74,40 @@ var SimpleTable = (function (_React$Component) {
             var headers = this.props.columns.map(function (header, index) {
                 return React.createElement(
                     "th",
-                    { key: "header" + index },
+                    { key: "header" + index, style: $component.props.hideColumns.indexOf(index) != -1 ? { display: "none" } : {} },
                     header
                 );
             });
+
             var rows = this.state.displayRows.map(function (row, index) {
                 if (index < ($component.state.page - 1) * $component.props.pageSize) return null;
                 if (index >= $component.state.page * $component.props.pageSize) return null;
-                // Check for keys on the individual tds on the row
-                // Need to figure this out later
-                /*
-                row.forEach(function(td, tdIndex) {
-                    if (td.key == null) {
-                        td.key = "row" + index + "item" + tdIndex;
-                    }
+
+                var items = row.map(function (td, tdIndex) {
+                    return React.createElement(
+                        "td",
+                        { key: "row" + index + "item" + tdIndex, style: $component.props.hideColumns.indexOf(tdIndex) != -1 ? { display: "none" } : {} },
+                        td
+                    );
                 });
-                */
                 return React.createElement(
                     "tr",
                     { key: "row" + index },
-                    row
+                    items
                 );
             });
+
+            if (rows.length == 0) {
+                rows = React.createElement(
+                    "tr",
+                    { key: "rowempty" },
+                    React.createElement(
+                        "td",
+                        { valign: "top", colSpan: headers.length, className: "dataTables_empty" },
+                        "No matching records found."
+                    )
+                );
+            }
 
             return React.createElement(
                 "div",
@@ -132,7 +146,7 @@ var SimpleTable = (function (_React$Component) {
     return SimpleTable;
 })(React.Component);
 
-SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10, filter: [] };
+SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10, hideColumns: [], filter: [] };
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -236,7 +250,7 @@ var SimpleTablePaging = (function (_React$Component) {
             );
             return React.createElement(
                 "div",
-                { classNameName: "row" },
+                { className: "row" },
                 React.createElement(
                     "div",
                     { className: "col-xs-12" },

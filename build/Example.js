@@ -11,86 +11,66 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var columns = ["Name", "State", "Age", "Note"];
 var rows = [[React.createElement(
-	"td",
+	"span",
 	null,
 	"Joe"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"PA"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"22"
-), React.createElement(
-	"td",
-	null,
-	React.createElement("input", { type: "text" })
-)], [React.createElement(
-	"td",
+), React.createElement("input", { type: "text" })], [React.createElement(
+	"span",
 	null,
 	"Jim"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"TX"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"55"
-), React.createElement(
-	"td",
-	null,
-	React.createElement("input", { type: "text" })
-)], [React.createElement(
-	"td",
+), React.createElement("input", { type: "text" })], [React.createElement(
+	"span",
 	null,
 	"John"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"NJ"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"34"
-), React.createElement(
-	"td",
-	null,
-	React.createElement("input", { type: "text" })
-)], [React.createElement(
-	"td",
+), React.createElement("input", { type: "text" })], [React.createElement(
+	"span",
 	null,
 	"Sam"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"CA"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"68"
-), React.createElement(
-	"td",
-	null,
-	React.createElement("input", { type: "text" })
-)], [React.createElement(
-	"td",
+), React.createElement("input", { type: "text" })], [React.createElement(
+	"span",
 	null,
 	"Steve"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"NY"
 ), React.createElement(
-	"td",
+	"span",
 	null,
 	"12"
-), React.createElement(
-	"td",
-	null,
-	React.createElement("input", { type: "text" })
-)]];
+), React.createElement("input", { type: "text" })]];
 
 React.render(React.createElement(SimpleTable, { columns: columns, rows: rows }), document.getElementById('Example1'));
 
@@ -99,19 +79,19 @@ var i = 0;
 var rows = [];
 for (i = 0; i <= 2000; i++) {
 	var item = [React.createElement(
-		"td",
+		"span",
 		{ "data-simpletable-value": "Row" + i },
 		"Row" + i
 	), React.createElement(
-		"td",
+		"span",
 		{ "data-simpletable-value": "Test" + i },
 		"Test" + i
 	), React.createElement(
-		"td",
+		"span",
 		{ "data-simpletable-value": "Testing" + i },
 		"Testing" + i
 	), React.createElement(
-		"td",
+		"span",
 		{ "data-simpletable-value": "End" + i },
 		"End" + i
 	)];

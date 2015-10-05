@@ -63,7 +63,7 @@ class SimpleTablePaging extends React.Component {
                 </li>
             </ul>
     	return (
-                <div classNameName="row">
+                <div className="row">
                     <div className="col-xs-12">
                         <div className="dataTables_paginate paging_simple_numbers">
                             {paging}

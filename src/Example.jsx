@@ -2,44 +2,34 @@
 var columns = ["Name","State","Age","Note"];
 var rows = [
 	[
-		<td>Joe</td>,
-		<td>PA</td>,
-		<td>22</td>,
-		<td>
-		    <input type="text" />
-		</td>         
+		<span>Joe</span>,
+		<span>PA</span>,
+		<span>22</span>,
+	    <input type="text" />       
 	],
 	[
-		<td>Jim</td>,
-		<td>TX</td>,
-		<td>55</td>,
-		<td>
-		    <input type="text" />
-		</td>         
+		<span>Jim</span>,
+		<span>TX</span>,
+		<span>55</span>,
+		<input type="text" />        
 	],
 	[
-		<td>John</td>,
-		<td>NJ</td>,
-		<td>34</td>,
-		<td>
-		    <input type="text" />
-		</td>         
+		<span>John</span>,
+		<span>NJ</span>,
+		<span>34</span>,
+		<input type="text" />        
 	],
 	[
-		<td>Sam</td>,
-		<td>CA</td>,
-		<td>68</td>,
-		<td>
-		    <input type="text" />
-		</td>         
+		<span>Sam</span>,
+		<span>CA</span>,
+		<span>68</span>,
+		<input type="text" />        
 	],
 	[
-		<td>Steve</td>,
-		<td>NY</td>,
-		<td>12</td>,
-		<td>
-		    <input type="text" />
-		</td>         
+		<span>Steve</span>,
+		<span>NY</span>,
+		<span>12</span>,
+		<input type="text" />       
 	]
 ]
 
@@ -53,10 +43,10 @@ var i = 0;
 var rows = [];
 for (i = 0; i <= 2000; i++){
 	var item = [
-		<td data-simpletable-value={"Row"+i}>{"Row"+i}</td>,
-		<td data-simpletable-value={"Test"+i}>{"Test"+i}</td>,
-		<td data-simpletable-value={"Testing"+i}>{"Testing"+i}</td>,
-		<td data-simpletable-value={"End"+i}>{"End"+i}</td>
+		<span data-simpletable-value={"Row"+i}>{"Row"+i}</span>,
+		<span data-simpletable-value={"Test"+i}>{"Test"+i}</span>,
+		<span data-simpletable-value={"Testing"+i}>{"Testing"+i}</span>,
+		<span data-simpletable-value={"End"+i}>{"End"+i}</span>
 	];
 
 	rows.push(item);

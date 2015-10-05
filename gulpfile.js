@@ -32,7 +32,8 @@ gulp.task('dependencies', function() {
    	'./node_modules/bootstrap/dist/css/bootstrap.css', 
    	'./node_modules/bootstrap/dist/css/bootstrap-theme.css',
    	'./node_modules/react/dist/react.js',
-   	'./node_modules/classnames/index.js'])
+   	'./node_modules/classnames/index.js',
+    './node_modules/underscore/underscore.js'])
 	.pipe(gulp.dest('./build/dependencies/'));
 })
 

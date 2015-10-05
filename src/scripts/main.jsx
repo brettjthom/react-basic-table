@@ -15,7 +15,9 @@ class SimpleTable extends React.Component {
             displayRows= filterTable(nextProps.rows, nextProps.filter);
         this.setState({ displayRows: displayRows });
         this.setState({ numPages: Math.ceil(displayRows.length / nextProps.pageSize) });
-        this.setState({ page: 1 });
+        if (!_.isEqual(this.props.filter, nextProps.filter)) {
+            this.setState({ page: 1 });
+        }
     }
 
     componentWillMount() {
@@ -36,27 +38,35 @@ class SimpleTable extends React.Component {
         var $component = this;
         var headers = this.props.columns.map(function (header, index) {
             return (
-                <th key={"header" + index}>{header}</th>
+                <th key={"header" + index} style={$component.props.hideColumns.indexOf(index) != -1 ? {display:"none"} : {} }>{header}</th>
             );
         });
+        
         var rows = this.state.displayRows.map(function (row, index) {
             if (index < ($component.state.page - 1) * $component.props.pageSize) return null;
             if (index >= ($component.state.page) * $component.props.pageSize) return null;
-            // Check for keys on the individual tds on the row
-            // Need to figure this out later
-            /*
-            row.forEach(function(td, tdIndex) {
-                if (td.key == null) {
-                    td.key = "row" + index + "item" + tdIndex;
-                }
+
+            var items = row.map(function(td, tdIndex) {
+                return (
+                    <td key={"row" + index + "item" + tdIndex} style={$component.props.hideColumns.indexOf(tdIndex) != -1 ? {display:"none"} : {} }>{td}</td>
+                );
             });
-            */
             return(
-              <tr key={"row" + index}>
-                  {row}
-              </tr>  
+                <tr key={"row" + index}>
+                    {items}
+                </tr>  
             );
         });
+
+
+        if (rows.length == 0) {
+            rows = 
+                <tr key={"rowempty"}>
+                    <td valign="top" colSpan={headers.length} className="dataTables_empty">
+                        No matching records found.
+                    </td>
+                </tr>
+        }
 
         return (
             <div>
@@ -80,4 +90,4 @@ class SimpleTable extends React.Component {
     }
 }
 
-SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10, filter: [] }
+SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10, hideColumns: [], filter: [] }
