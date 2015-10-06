@@ -1,4 +1,8 @@
-class SimpleTablePaging extends React.Component {
+'use strict';
+
+import classNames from 'classNames';
+
+export default class SimpleTablePaging extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,18 +45,18 @@ class SimpleTablePaging extends React.Component {
 		            <li key={"paging-...-" + i} className="paginate_button disabled">
 		                <a href="#" onClick={this.setPage.bind(this, i)}>...</a>
 		            </li>
-	            );    
+	            );
 
         	pagingNumbers.push(
 	            <li key={"paging-" + i} className={numberClassName}>
 	                <a href="#" onClick={this.setPage.bind(this, i)}>{i}</a>
 	            </li>
             );
-            
+
             lastNumberAdded = i;
         }
 
-        var paging = 
+        var paging =
             <ul className="pagination">
                 <li key="paging-previous" className={previousClass}>
                     <a href="#" onClick={this.previousPage.bind(this)}>Previous</a>

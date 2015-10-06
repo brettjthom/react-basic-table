@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Example 1
 var columns = ["Name","State","Age","Note"];
 var rows = [
@@ -5,31 +7,31 @@ var rows = [
 		<span>Joe</span>,
 		<span>PA</span>,
 		<span>22</span>,
-	    <input type="text" />       
+	    <input type="text" />
 	],
 	[
 		<span>Jim</span>,
 		<span>TX</span>,
 		<span>55</span>,
-		<input type="text" />        
+		<input type="text" />
 	],
 	[
 		<span>John</span>,
 		<span>NJ</span>,
 		<span>34</span>,
-		<input type="text" />        
+		<input type="text" />
 	],
 	[
 		<span>Sam</span>,
 		<span>CA</span>,
 		<span>68</span>,
-		<input type="text" />        
+		<input type="text" />
 	],
 	[
 		<span>Steve</span>,
 		<span>NY</span>,
 		<span>12</span>,
-		<input type="text" />       
+		<input type="text" />
 	]
 ]
 

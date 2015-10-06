@@ -1,2 +1,3 @@
-# SimpleTable
-A datatable library for react.js
+# SimpleTables
+
+Table library for React.
