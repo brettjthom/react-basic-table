@@ -1,4 +1,6 @@
-function filterTable(rows, criterias) {
+'use strict';
+
+export default function filterTable(rows, criterias) {
 	var filteredCriterias = criterias.filter(function(criteria) { if (criteria.match && criteria.match !== "") return true; } );
 	if (filteredCriterias && filteredCriterias.length == 0) return rows;
 	var newArray = rows.filter(function(row) {

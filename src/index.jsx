@@ -1,4 +1,12 @@
-class SimpleTable extends React.Component {
+'use strict';
+
+import React from "react";
+import _ from "underscore";
+import SimpleTablePaging from "./paging.jsx";
+import filterTable from "./filtering.jsx";
+import classNames from 'classNames';
+
+export default class SimpleTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +31,7 @@ class SimpleTable extends React.Component {
     componentWillMount() {
         // Filter if you receive the filer prop
         var displayRows = this.props.rows;
-        if (this.props.filter.length > 0 && this.props.rows.length > 0) 
+        if (this.props.filter.length > 0 && this.props.rows.length > 0)
             displayRows= filterTable(this.props.rows, this.props.filter);
         this.setState({ displayRows: displayRows });
         this.setState({ numPages: Math.ceil(displayRows.length / this.props.pageSize) });
@@ -41,7 +49,7 @@ class SimpleTable extends React.Component {
                 <th key={"header" + index} style={$component.props.hideColumns.indexOf(index) != -1 ? {display:"none"} : {} }>{header}</th>
             );
         });
-        
+
         var rows = this.state.displayRows.map(function (row, index) {
             if (index < ($component.state.page - 1) * $component.props.pageSize) return null;
             if (index >= ($component.state.page) * $component.props.pageSize) return null;
@@ -54,13 +62,13 @@ class SimpleTable extends React.Component {
             return(
                 <tr key={"row" + index}>
                     {items}
-                </tr>  
+                </tr>
             );
         });
 
 
         if (rows.length == 0) {
-            rows = 
+            rows =
                 <tr key={"rowempty"}>
                     <td valign="top" colSpan={headers.length} className="dataTables_empty">
                         No matching records found.
