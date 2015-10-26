@@ -80,13 +80,23 @@ class SimpleTableFilteringExample extends React.Component {
 				id: 3,
 				match: ""
 			}
-		]};
+		], filterMode: "Or"};
 	}
 
 	changeFilter(column, event) {
 		var newFilter = this.state.filter.slice();
 		newFilter[column].match = event.target.value;
 		this.setState({ filter: newFilter });
+	}
+
+	changeMode() {
+		debugger;
+		if (this.state.filterMode == "Or") {
+			this.setState({filterMode: "And"});
+		}
+		else {
+			this.setState({filterMode: "Or"});
+		}
 	}
 
 	render() {
@@ -109,9 +119,9 @@ class SimpleTableFilteringExample extends React.Component {
 						<label htmlFor="filterColumn3">Column 3</label>
 						<input onChange={this.changeFilter.bind(this, 3)} className="form-control" id="filterColumn3" placeholder="Filter" />
 					</div>
+					<button type="button" className="btn" onClick={this.changeMode.bind(this)}>{"Filter Mode - " + this.state.filterMode}</button>
 				</form>
-
-				<SimpleTable columns={this.props.columns} rows={this.props.rows} filter={this.state.filter} />
+				<SimpleTable columns={this.props.columns} rows={this.props.rows} filter={this.state.filter} filterMode={this.state.filterMode} />
 			</div>
 		);
 	}

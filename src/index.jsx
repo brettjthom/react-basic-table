@@ -20,7 +20,7 @@ export default class SimpleTable extends React.Component {
         // Filter if you receive the filer prop
         var displayRows = nextProps.rows;
         if (nextProps.filter.length > 0 && nextProps.rows.length > 0)
-            displayRows= filterTable(nextProps.rows, nextProps.filter);
+            displayRows= filterTable(nextProps.rows, nextProps.filter, nextProps.filterMode);
         this.setState({ displayRows: displayRows });
         this.setState({ numPages: Math.ceil(displayRows.length / nextProps.pageSize) });
         if (!_.isEqual(this.props.filter, nextProps.filter)) {
@@ -32,7 +32,7 @@ export default class SimpleTable extends React.Component {
         // Filter if you receive the filer prop
         var displayRows = this.props.rows;
         if (this.props.filter.length > 0 && this.props.rows.length > 0)
-            displayRows= filterTable(this.props.rows, this.props.filter);
+            displayRows= filterTable(this.props.rows, this.props.filter, this.props.filterMode);
         this.setState({ displayRows: displayRows });
         this.setState({ numPages: Math.ceil(displayRows.length / this.props.pageSize) });
         this.setState({ page: 1 });
@@ -98,4 +98,4 @@ export default class SimpleTable extends React.Component {
     }
 }
 
-SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10, hideColumns: [], filter: [] }
+SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10, hideColumns: [], filter: [], filterMode: "Or" }
