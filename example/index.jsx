@@ -1,4 +1,5 @@
 import React from 'react';
+import SimpleTable from '../lib/simple-table';
 
 // Example 1
 var columns = ["Name","State","Age","Note"];

@@ -5,12 +5,12 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/ }
+      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/, presets: ['es2015'] }
     ]
   },
 
   externals: {
-    react: 'React'
+    React: 'react'
   },
 
   output: {
@@ -20,8 +20,7 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.DedupePlugin()
   ],
 
   resolve: {

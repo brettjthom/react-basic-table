@@ -1,9 +1,9 @@
 'use strict';
 
-import React from "react";
-import _ from "underscore";
-import SimpleTablePaging from "./paging.jsx";
-import filterTable from "./filtering.jsx";
+import React from 'react';
+import _ from 'underscore';
+import SimpleTablePaging from './paging.jsx';
+import filterTable from './filtering.jsx';
 import classNames from 'classNames';
 
 export default class SimpleTable extends React.Component {

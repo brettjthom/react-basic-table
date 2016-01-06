@@ -1,5 +1,6 @@
 'use strict';
 
+import React from 'react';
 import classNames from 'classNames';
 
 export default class SimpleTablePaging extends React.Component {

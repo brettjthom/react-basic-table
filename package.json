@@ -2,7 +2,7 @@
   "name": "simpletable",
   "version": "1.0.0",
   "description": "",
-  "main": "gulpfile.js",
+  "main": "./lib/simple-table.js",  
   "dependencies": {
     "react": "^0.13.3"
   },
@@ -18,9 +18,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack && webpack -p -d",
-    "watch": "webpack --watch",
-    "watch-example": "webpack --config webpack.config.example.js --watch"
+    "build": "node ./node_modules/webpack/bin/webpack.js && node ./node_modules/webpack/bin/webpack.js -p -d && node ./node_modules/webpack/bin/webpack.js -var -p -d",
+    "watch": "node ./node_modules/webpack/bin/webpack.js --watch",
+    "build-example": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.example.js",
+    "watch-example": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.example.js --watch"
   },
   "author": "Brett Thom",
   "license": "MIT"
