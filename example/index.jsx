@@ -132,3 +132,9 @@ React.render(
   <SimpleTableFilteringExample columns={columns} rows={rows} />,
   document.getElementById('Example3')
 );
+
+// Example 4
+React.render(
+  <SimpleTable columns={columns} rows={rows} sort={[0,2]} />,
+  document.getElementById('Example4')
+);

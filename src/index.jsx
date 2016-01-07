@@ -4,6 +4,7 @@ import React from 'react';
 import _ from 'underscore';
 import SimpleTablePaging from './paging.jsx';
 import filterTable from './filtering.jsx';
+import sortTable from './sorting.jsx';
 import classNames from 'classNames';
 
 export default class SimpleTable extends React.Component {
@@ -12,7 +13,8 @@ export default class SimpleTable extends React.Component {
         this.state = {
             page: 1,
             numPages: 1,
-            displayRows: []
+            displayRows: [],
+            sortedBy: {}
         }
     }
 
@@ -42,15 +44,31 @@ export default class SimpleTable extends React.Component {
         this.setState({ page: newPage });
     }
 
+    sortColumn(index) {
+            if (this.state.sortedBy.column !== index) {
+                this.setState({sortedBy: {column: index, mode: "Asc"}});
+            }
+            else {
+                this.setState({sortedBy: {column: index, mode: this.state.sortedBy.mode === "Asc" ? "Desc" : "Asc"}});
+            }
+    }
+
     render() {
         var $component = this;
         var headers = this.props.columns.map(function (header, index) {
-            return (
-                <th key={"header" + index} style={$component.props.hideColumns.indexOf(index) != -1 ? {display:"none"} : {} }>{header}</th>
-            );
+            if ($component.props.sort.indexOf(index) == -1) {
+                return (
+                    <th key={"header" + index} style={$component.props.hideColumns.indexOf(index) != -1 ? {display:"none"} : {} }>{header}</th>
+                );
+            }
+            else {
+                return (
+                    <th key={"header" + index} style={$component.props.hideColumns.indexOf(index) != -1 ? {display:"none"} : {} } onClick={$component.sortColumn.bind($component, index)}>{header}</th>
+                );
+            }
         });
 
-        var rows = this.state.displayRows.map(function (row, index) {
+        var rows = sortTable(this.state.displayRows, this.state.sortedBy).map(function (row, index) {
             if (index < ($component.state.page - 1) * $component.props.pageSize) return null;
             if (index >= ($component.state.page) * $component.props.pageSize) return null;
 
@@ -98,4 +116,4 @@ export default class SimpleTable extends React.Component {
     }
 }
 
-SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10, hideColumns: [], filter: [], filterMode: "Or" }
+SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10, hideColumns: [], filter: [], sort: [], filterMode: "Or" }
