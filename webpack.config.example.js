@@ -4,6 +4,9 @@ module.exports = {
   entry: './example/index.jsx',
 
   module: {
+    preLoaders: [
+      { test: /\.jsx?$/, include: /src/, loaders: ['eslint?{fix:true}']}
+    ],
     loaders: [
       { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/, presets: ['es2015'] }
     ]
@@ -22,6 +25,12 @@ module.exports = {
   plugins: [
     new webpack.optimize.DedupePlugin()
   ],
+
+  eslint: {
+      failOnWarning: false,
+      failOnError: true,
+      configFile: './.eslintrc.js'
+  },
 
   resolve: {
     extensions: ['', '.jsx', '.js']

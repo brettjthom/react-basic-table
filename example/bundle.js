@@ -75,7 +75,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _libSimpleTable2 = _interopRequireDefault(_libSimpleTable);
 
 	// Example 1
-	var columns = ["Name", "State", "Age", "Note"];
+	var columns = ['Name', 'State', 'Age', 'Note'];
 	var rows = [[_react2['default'].createElement(
 		'span',
 		null,
@@ -146,20 +146,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	for (i = 0; i <= 2000; i++) {
 		var item = [_react2['default'].createElement(
 			'span',
-			{ 'data-simpletable-value': "Row" + i },
-			"Row" + i
+			{ 'data-simpletable-value': 'Row' + i },
+			'Row' + i
 		), _react2['default'].createElement(
 			'span',
-			{ 'data-simpletable-value': "Test" + i },
-			"Test" + i
+			{ 'data-simpletable-value': 'Test' + i },
+			'Test' + i
 		), _react2['default'].createElement(
 			'span',
-			{ 'data-simpletable-value': "Testing" + i },
-			"Testing" + i
+			{ 'data-simpletable-value': 'Testing' + i },
+			'Testing' + i
 		), _react2['default'].createElement(
 			'span',
-			{ 'data-simpletable-value': "End" + i },
-			"End" + i
+			{ 'data-simpletable-value': 'End' + i },
+			'End' + i
 		)];
 
 		rows.push(item);
@@ -178,17 +178,17 @@ return /******/ (function(modules) { // webpackBootstrap
 			_get(Object.getPrototypeOf(SimpleTableFilteringExample.prototype), 'constructor', this).call(this, props);
 			this.state = { filter: [{
 					id: 0,
-					match: ""
+					match: ''
 				}, {
 					id: 1,
-					match: ""
+					match: ''
 				}, {
 					id: 2,
-					match: ""
+					match: ''
 				}, {
 					id: 3,
-					match: ""
-				}], filterMode: "Or" };
+					match: ''
+				}], filterMode: 'Or' };
 		}
 
 		_createClass(SimpleTableFilteringExample, [{
@@ -202,10 +202,10 @@ return /******/ (function(modules) { // webpackBootstrap
 			key: 'changeMode',
 			value: function changeMode() {
 				debugger;
-				if (this.state.filterMode == "Or") {
-					this.setState({ filterMode: "And" });
+				if (this.state.filterMode == 'Or') {
+					this.setState({ filterMode: 'And' });
 				} else {
-					this.setState({ filterMode: "Or" });
+					this.setState({ filterMode: 'Or' });
 				}
 			}
 		}, {
@@ -260,7 +260,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						_react2['default'].createElement(
 							'button',
 							{ type: 'button', className: 'btn', onClick: this.changeMode.bind(this) },
-							"Filter Mode - " + this.state.filterMode
+							'Filter Mode - ' + this.state.filterMode
 						)
 					),
 					_react2['default'].createElement(_libSimpleTable2['default'], { columns: this.props.columns, rows: this.props.rows, filter: this.state.filter, filterMode: this.state.filterMode })
@@ -443,14 +443,83 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// shim for using process in browser
-
 	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	    try {
+	        cachedSetTimeout = setTimeout;
+	    } catch (e) {
+	        cachedSetTimeout = function () {
+	            throw new Error('setTimeout is not defined');
+	        }
+	    }
+	    try {
+	        cachedClearTimeout = clearTimeout;
+	    } catch (e) {
+	        cachedClearTimeout = function () {
+	            throw new Error('clearTimeout is not defined');
+	        }
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+
+
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+
+
+
+	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
 	var queueIndex = -1;
 
 	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -466,7 +535,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = runTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -483,7 +552,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    runClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -495,7 +564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        runTimeout(drainQueue);
 	    }
 	};
 
@@ -20745,10 +20814,6 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				};
 
-				function _interopRequireDefault(obj) {
-					return obj && obj.__esModule ? obj : { 'default': obj };
-				}
-
 				function _classCallCheck(instance, Constructor) {
 					if (!(instance instanceof Constructor)) {
 						throw new TypeError('Cannot call a class as a function');
@@ -20761,29 +20826,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 				}
 
-				var _react = __webpack_require__(1);
-
-				var _react2 = _interopRequireDefault(_react);
-
-				var _underscore = __webpack_require__(2);
-
-				var _underscore2 = _interopRequireDefault(_underscore);
-
-				var _pagingJsx = __webpack_require__(3);
-
-				var _pagingJsx2 = _interopRequireDefault(_pagingJsx);
-
-				var _filteringJsx = __webpack_require__(5);
-
-				var _filteringJsx2 = _interopRequireDefault(_filteringJsx);
-
-				var _sortingJsx = __webpack_require__(6);
-
-				var _sortingJsx2 = _interopRequireDefault(_sortingJsx);
-
-				var _classNames = __webpack_require__(4);
-
-				var _classNames2 = _interopRequireDefault(_classNames);
+				var React = __webpack_require__(1);
+				var _ = __webpack_require__(2);
+				var SimpleTablePaging = __webpack_require__(3);
+				var filterTable = __webpack_require__(5);
+				var sortTable = __webpack_require__(6);
 
 				var SimpleTable = (function (_React$Component) {
 					_inherits(SimpleTable, _React$Component);
@@ -20801,26 +20848,30 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 
 					_createClass(SimpleTable, [{
-						key: 'componentWillReceiveProps',
-						value: function componentWillReceiveProps(nextProps) {
-							// Filter if you receive the filer prop
-							var displayRows = nextProps.rows;
-							if (nextProps.filter.length > 0 && nextProps.rows.length > 0) displayRows = (0, _filteringJsx2['default'])(nextProps.rows, nextProps.filter, nextProps.filterMode);
-							this.setState({ displayRows: displayRows });
-							this.setState({ numPages: Math.ceil(displayRows.length / nextProps.pageSize) });
-							if (!_underscore2['default'].isEqual(this.props.filter, nextProps.filter)) {
-								this.setState({ page: 1 });
-							}
-						}
-					}, {
 						key: 'componentWillMount',
 						value: function componentWillMount() {
 							// Filter if you receive the filer prop
 							var displayRows = this.props.rows;
-							if (this.props.filter.length > 0 && this.props.rows.length > 0) displayRows = (0, _filteringJsx2['default'])(this.props.rows, this.props.filter, this.props.filterMode);
+							if (this.props.filter.length > 0 && this.props.rows.length > 0) {
+								displayRows = filterTable(this.props.rows, this.props.filter, this.props.filterMode);
+							}
 							this.setState({ displayRows: displayRows });
 							this.setState({ numPages: Math.ceil(displayRows.length / this.props.pageSize) });
 							this.setState({ page: 1 });
+						}
+					}, {
+						key: 'componentWillReceiveProps',
+						value: function componentWillReceiveProps(nextProps) {
+							// Filter if you receive the filer prop
+							var displayRows = nextProps.rows;
+							if (nextProps.filter.length > 0 && nextProps.rows.length > 0) {
+								displayRows = filterTable(nextProps.rows, nextProps.filter, nextProps.filterMode);
+							}
+							this.setState({ displayRows: displayRows });
+							this.setState({ numPages: Math.ceil(displayRows.length / nextProps.pageSize) });
+							if (!_.isEqual(this.props.filter, nextProps.filter)) {
+								this.setState({ page: 1 });
+							}
 						}
 					}, {
 						key: 'setPage',
@@ -20831,47 +20882,83 @@ return /******/ (function(modules) { // webpackBootstrap
 						key: 'sortColumn',
 						value: function sortColumn(index) {
 							if (this.state.sortedBy.column !== index) {
-								this.setState({ sortedBy: { column: index, mode: "Asc" } });
+								this.setState({ sortedBy: { column: index, mode: 'Asc' } });
 							} else {
-								this.setState({ sortedBy: { column: index, mode: this.state.sortedBy.mode === "Asc" ? "Desc" : "Asc" } });
+								this.setState({ sortedBy: {
+										column: index,
+										mode: this.state.sortedBy.mode === 'Asc' ? 'Desc' : 'Asc' } });
 							}
 						}
 					}, {
 						key: 'render',
 						value: function render() {
-							var $component = this;
+							var _this = this;
+
+							var items = undefined;
 							var headers = this.props.columns.map(function (header, index) {
-								if ($component.props.sort.indexOf(index) == -1) {
-									return _react2['default'].createElement('th', { key: "header" + index, style: $component.props.hideColumns.indexOf(index) != -1 ? { display: "none" } : {} }, header);
-								} else {
-									return _react2['default'].createElement('th', { key: "header" + index, style: $component.props.hideColumns.indexOf(index) != -1 ? { display: "none" } : {}, onClick: $component.sortColumn.bind($component, index) }, header);
+								if (_this.props.sort.indexOf(index) === -1) {
+									return React.createElement('th', { key: 'header' + index,
+										style: _this.props.hideColumns.indexOf(index) !== -1 ? { display: 'none' } : {}
+									}, header);
 								}
+								return React.createElement('th', { key: 'header' + index,
+									style: _this.props.hideColumns.indexOf(index) !== -1 ? { display: 'none' } : {}, onClick: _this.sortColumn.bind(_this, index)
+								}, header);
 							});
 
-							var rows = (0, _sortingJsx2['default'])(this.state.displayRows, this.state.sortedBy).map(function (row, index) {
-								if (index < ($component.state.page - 1) * $component.props.pageSize) return null;
-								if (index >= $component.state.page * $component.props.pageSize) return null;
+							var rows = sortTable(this.state.displayRows, this.state.sortedBy).map(function (row, index) {
+								if (index < (_this.state.page - 1) * _this.props.pageSize) {
+									return null;
+								}
+								if (index >= _this.state.page * _this.props.pageSize) {
+									return null;
+								}
 
-								var items = row.map(function (td, tdIndex) {
-									return _react2['default'].createElement('td', { key: "row" + index + "item" + tdIndex, style: $component.props.hideColumns.indexOf(tdIndex) != -1 ? { display: "none" } : {} }, td);
+								items = row.map(function (td, tdIndex) {
+									return React.createElement('td', { key: 'row' + index + 'item' + tdIndex,
+										style: _this.props.hideColumns.indexOf(tdIndex) !== -1 ? { display: 'none' } : {}
+									}, td);
 								});
-								return _react2['default'].createElement('tr', { key: "row" + index }, items);
+								return React.createElement('tr', { key: 'row' + index }, items);
 							});
 
-							if (rows.length == 0) {
-								rows = _react2['default'].createElement('tr', { key: "rowempty" }, _react2['default'].createElement('td', { valign: 'top', colSpan: headers.length, className: 'dataTables_empty' }, 'No matching records found.'));
+							if (rows.length === 0) {
+								rows = React.createElement('tr', { key: "rowempty" }, React.createElement('td', { valign: 'top', colSpan: headers.length, className: 'dataTables_empty' }, 'No matching records found.'));
 							}
 
-							return _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: 'row' }, _react2['default'].createElement('div', { className: 'col-xs-12' }, _react2['default'].createElement('table', { className: 'table' }, _react2['default'].createElement('thead', null, _react2['default'].createElement('tr', null, headers)), _react2['default'].createElement('tbody', null, rows)))), _react2['default'].createElement(_pagingJsx2['default'], { numPages: this.state.numPages, page: this.state.page, setPage: this.setPage.bind(this) }));
+							return React.createElement('div', null, React.createElement('div', { className: 'row' }, React.createElement('div', { className: 'col-xs-12' }, React.createElement('table', { className: 'table' }, React.createElement('thead', null, React.createElement('tr', null, headers)), React.createElement('tbody', null, rows)))), React.createElement(SimpleTablePaging, { numPages: this.state.numPages,
+								page: this.state.page,
+								setPage: this.setPage.bind(this)
+							}));
 						}
 					}]);
 
 					return SimpleTable;
-				})(_react2['default'].Component);
+				})(React.Component);
 
 				exports['default'] = SimpleTable;
 
-				SimpleTable.defaultProps = { rows: [], columns: [], pageSize: 10, hideColumns: [], filter: [], sort: [], filterMode: "Or" };
+				SimpleTable.defaultProps = {
+					rows: [],
+					columns: [],
+					pageSize: 10,
+					hideColumns: [],
+					filter: [],
+					sort: [],
+					filterMode: 'Or'
+				};
+
+				SimpleTable.propTypes = {
+					rows: React.PropTypes.array,
+					columns: React.PropTypes.array,
+					pageSize: React.PropTypes.number,
+					hideColumns: React.PropTypes.array,
+					filter: React.PropTypes.array,
+					sort: React.PropTypes.array,
+					filterMode: React.PropTypes.string
+				};
+
+				module.exports = SimpleTable;
 				module.exports = exports['default'];
 
 				/***/
@@ -22457,10 +22544,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				'use strict';
 
-				Object.defineProperty(exports, '__esModule', {
-					value: true
-				});
-
 				var _createClass = (function () {
 					function defineProperties(target, props) {
 						for (var i = 0; i < props.length; i++) {
@@ -22491,10 +22574,6 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				};
 
-				function _interopRequireDefault(obj) {
-					return obj && obj.__esModule ? obj : { 'default': obj };
-				}
-
 				function _classCallCheck(instance, Constructor) {
 					if (!(instance instanceof Constructor)) {
 						throw new TypeError('Cannot call a class as a function');
@@ -22507,13 +22586,8 @@ return /******/ (function(modules) { // webpackBootstrap
 					}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 				}
 
-				var _react = __webpack_require__(1);
-
-				var _react2 = _interopRequireDefault(_react);
-
-				var _classNames = __webpack_require__(4);
-
-				var _classNames2 = _interopRequireDefault(_classNames);
+				var React = __webpack_require__(1);
+				var classNames = __webpack_require__(4);
 
 				var SimpleTablePaging = (function (_React$Component) {
 					_inherits(SimpleTablePaging, _React$Component);
@@ -22529,56 +22603,70 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 
 					_createClass(SimpleTablePaging, [{
-						key: 'nextPage',
-						value: function nextPage(e) {
-							if (this.props.page < this.props.numPages && this.props.numPages > 0) this.props.setPage(this.props.page + 1);
-							e.preventDefault();
-						}
-					}, {
-						key: 'previousPage',
-						value: function previousPage(e) {
-							if (this.props.page > 1) this.props.setPage(this.props.page - 1);
-							e.preventDefault();
-						}
-					}, {
 						key: 'setPage',
 						value: function setPage(page, e) {
 							this.props.setPage(page);
 							e.preventDefault();
 						}
 					}, {
+						key: 'nextPage',
+						value: function nextPage(e) {
+							if (this.props.page < this.props.numPages && this.props.numPages > 0) {
+								this.props.setPage(this.props.page + 1);
+							}
+							e.preventDefault();
+						}
+					}, {
+						key: 'previousPage',
+						value: function previousPage(e) {
+							if (this.props.page > 1) {
+								this.props.setPage(this.props.page - 1);
+							}
+							e.preventDefault();
+						}
+					}, {
 						key: 'render',
 						value: function render() {
-							var previousClass = (0, _classNames2['default'])("paginate_button", "previous", { "disabled": this.props.page == 1 });
-							var nextClass = (0, _classNames2['default'])("paginate_button", "next", { "disabled": this.props.page == this.props.numPages || this.props.numPages == 0 });
-
-							// Create individual numbers
 							var i = 1;
 							var pagingNumbers = [];
 							var lastNumberAdded = null;
+							var paging = undefined;
+							var numberClassName = undefined;
+							var previousClass = classNames('paginate_button', 'previous', { disabled: this.props.page === 1 });
+							var nextClass = classNames('paginate_button', 'next', { disabled: this.props.page === this.props.numPages || this.props.numPages === 0 });
+
+							// Create individual numbers
 							for (i = 1; i <= this.props.numPages; i++) {
-								if (i !== 1 && i !== this.props.numPages && Math.abs(i - this.props.page) > 2) continue;
+								if (i !== 1 && i !== this.props.numPages && Math.abs(i - this.props.page) > 2) {
+									continue;
+								}
 
-								var numberClassName = (0, _classNames2['default'])("paginate_button", { "disabled": this.props.page == i });
-								if (lastNumberAdded !== null && lastNumberAdded !== i - 1) pagingNumbers.push(_react2['default'].createElement('li', { key: "paging-...-" + i, className: 'paginate_button disabled' }, _react2['default'].createElement('a', { href: '#', onClick: this.setPage.bind(this, i) }, '...')));
-
-								pagingNumbers.push(_react2['default'].createElement('li', { key: "paging-" + i, className: numberClassName }, _react2['default'].createElement('a', { href: '#', onClick: this.setPage.bind(this, i) }, i)));
+								numberClassName = classNames('paginate_button', { disabled: this.props.page === i });
+								if (lastNumberAdded !== null && lastNumberAdded !== i - 1) {
+									pagingNumbers.push(React.createElement('li', { key: 'paging-...-' + i, className: 'paginate_button disabled' }, React.createElement('a', { href: '#', onClick: this.setPage.bind(this, i) }, '...')));
+								}
+								pagingNumbers.push(React.createElement('li', { key: 'paging' + i, className: numberClassName }, React.createElement('a', { href: '#', onClick: this.setPage.bind(this, i) }, i)));
 
 								lastNumberAdded = i;
 							}
 
-							var paging = _react2['default'].createElement('ul', { className: 'pagination' }, _react2['default'].createElement('li', { key: 'paging-previous', className: previousClass }, _react2['default'].createElement('a', { href: '#', onClick: this.previousPage.bind(this) }, 'Previous')), pagingNumbers, _react2['default'].createElement('li', { key: 'paging-next', className: nextClass }, _react2['default'].createElement('a', { href: '#', onClick: this.nextPage.bind(this) }, 'Next')));
-							return _react2['default'].createElement('div', { className: 'row' }, _react2['default'].createElement('div', { className: 'col-xs-12' }, _react2['default'].createElement('div', { className: 'dataTables_paginate paging_simple_numbers' }, paging)));
+							paging = React.createElement('ul', { className: 'pagination' }, React.createElement('li', { key: 'paging-previous', className: previousClass }, React.createElement('a', { href: '#', onClick: this.previousPage.bind(this) }, 'Previous')), pagingNumbers, React.createElement('li', { key: 'paging-next', className: nextClass }, React.createElement('a', { href: '#', onClick: this.nextPage.bind(this) }, 'Next')));
+							return React.createElement('div', { className: 'row' }, React.createElement('div', { className: 'col-xs-12' }, React.createElement('div', { className: 'dataTables_paginate paging_simple_numbers' }, paging)));
 						}
 					}]);
 
 					return SimpleTablePaging;
-				})(_react2['default'].Component);
+				})(React.Component);
 
-				exports['default'] = SimpleTablePaging;
+				SimpleTablePaging.defaultProps = { page: 1, pageNum: 1, numPages: 1, setPage: { 'function': function _function() {} } };
+				SimpleTablePaging.propTypes = {
+					page: React.PropTypes.number,
+					pageNum: React.PropTypes.number,
+					numPages: React.PropTypes.number,
+					setPage: React.PropTypes.func
+				};
 
-				SimpleTablePaging.defaultProps = { page: 1, pageNum: 1, setPage: { 'function': function _function() {} } };
-				module.exports = exports['default'];
+				module.exports = SimpleTablePaging;
 
 				/***/
 			},
@@ -22641,33 +22729,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				'use strict';
 
-				Object.defineProperty(exports, "__esModule", {
+				Object.defineProperty(exports, '__esModule', {
 					value: true
 				});
-				exports["default"] = filterTable;
+				exports['default'] = filterTable;
 
 				function filterTable(rows, criterias, mode) {
 					var filteredCriterias = criterias.filter(function (criteria) {
-						if (criteria.match && criteria.match !== "") return true;
+						if (criteria.match && criteria.match !== '') {
+							return true;
+						}
+						return false;
 					});
-					if (filteredCriterias && filteredCriterias.length == 0) return rows;
-					var newArray;
-					if (mode == "And") {
+					var keep = undefined;
+					var newArray = undefined;
+					if (filteredCriterias && filteredCriterias.length === 0) {
+						return rows;
+					}
+					if (mode === 'And') {
 						newArray = rows.filter(function (row) {
-							var keep = true;
+							keep = true;
 							filteredCriterias.forEach(function (criteria) {
-								if (row[criteria.id].props["data-simpletable-value"].toLowerCase().indexOf(criteria.match.toLowerCase()) == -1) keep = false;
+								if (row[criteria.id].props['data-simpletable-value'].toLowerCase().indexOf(criteria.match.toLowerCase()) === -1) {
+									keep = false;
+								}
 							});
 
 							return keep;
 						});
 					}
 
-					if (mode == "Or") {
+					if (mode === 'Or') {
 						newArray = rows.filter(function (row) {
-							var keep = false;
+							keep = false;
 							filteredCriterias.forEach(function (criteria) {
-								if (row[criteria.id].props["data-simpletable-value"].toLowerCase().indexOf(criteria.match.toLowerCase()) !== -1) keep = true;
+								if (row[criteria.id].props['data-simpletable-value'].toLowerCase().indexOf(criteria.match.toLowerCase()) !== -1) {
+									keep = true;
+								}
 							});
 
 							return keep;
@@ -22677,7 +22775,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					return newArray;
 				}
 
-				module.exports = exports["default"];
+				module.exports = exports['default'];
 
 				/***/
 			},
@@ -22686,30 +22784,29 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				'use strict';
 
-				Object.defineProperty(exports, "__esModule", {
+				Object.defineProperty(exports, '__esModule', {
 					value: true
 				});
-				exports["default"] = sortTable;
+				exports['default'] = sortTable;
 
 				function sortTable(rows, sortedBy) {
-					var newArray;
+					var newArray = undefined;
 
 					if (sortedBy.column === undefined || sortedBy.mode === undefined) {
 						newArray = rows;
 					} else {
 						newArray = rows.sort(function (a, b) {
-							if (sortedBy.mode == "Asc") {
-								return a[sortedBy.column].props["data-simpletable-value"].localeCompare(b[sortedBy.column].props["data-simpletable-value"]);
-							} else {
-								return -a[sortedBy.column].props["data-simpletable-value"].localeCompare(b[sortedBy.column].props["data-simpletable-value"]);
+							if (sortedBy.mode === 'Asc') {
+								return a[sortedBy.column].props['data-simpletable-value'].localeCompare(b[sortedBy.column].props['data-simpletable-value']);
 							}
+							return -a[sortedBy.column].props['data-simpletable-value'].localeCompare(b[sortedBy.column].props['data-simpletable-value']);
 						});
 					}
 
 					return newArray;
 				}
 
-				module.exports = exports["default"];
+				module.exports = exports['default'];
 
 				/***/
 			}

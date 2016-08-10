@@ -12,15 +12,19 @@ outputName = outputName + (minify ? '.min.js' : '.js');
 
 var plugins = [
   new webpack.optimize.DedupePlugin()
-].push(minify ? new webpack.optimize.UglifyJsPlugin() : null );
+]
+if (minify) plugins.push(new webpack.optimize.UglifyJsPlugin()); 
 
 
 module.exports = {
   entry: './src/index.jsx',
 
   module: {
+    preLoaders: [
+      { test: /\.jsx?$/, include: /src/, loaders: ['eslint?{fix:true}']}
+    ],
     loaders: [
-      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/ }
+      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel'] }
     ]
   },
 
@@ -35,6 +39,12 @@ module.exports = {
   },
 
   plugins: plugins,
+
+  eslint: {
+      failOnWarning: false,
+      failOnError: true,
+      configFile: './.eslintrc.js'
+  },
 
   resolve: {
     extensions: ['', '.jsx', '.js']
