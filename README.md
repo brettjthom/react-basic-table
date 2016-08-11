@@ -1,3 +1,3 @@
-# SimpleTables
+# ReactBasicTable
 
 Table library for React.

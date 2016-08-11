@@ -15,7 +15,7 @@ export default function filterTable(rows, criterias, mode) {
             keep = true;
             filteredCriterias.forEach((criteria) => {
                 if (row[criteria.id]
-                    .props['data-simpletable-value']
+                    .props['data-ReactBasicTable-value']
                     .toLowerCase()
                     .indexOf(criteria.match.toLowerCase()) === -1) {
                     keep = false;
@@ -31,7 +31,7 @@ export default function filterTable(rows, criterias, mode) {
             keep = false;
             filteredCriterias.forEach((criteria) => {
                 if (row[criteria.id]
-                    .props['data-simpletable-value']
+                    .props['data-ReactBasicTable-value']
                     .toLowerCase()
                     .indexOf(criteria.match.toLowerCase()) !== -1) {
                     keep = true;

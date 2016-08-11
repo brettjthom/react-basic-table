@@ -8,12 +8,20 @@ module.exports = {
       { test: /\.jsx?$/, include: /src/, loaders: ['eslint?{fix:true}']}
     ],
     loaders: [
-      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/, presets: ['es2015'] }
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel', query: {
+        presets: ['react', 'es2015'],
+        plugins: ["add-module-exports"]
+      } }
     ]
   },
 
   externals: {
-    React: 'react'
+    "react": {
+        root: "React",
+        commonjs2: "react",
+        commonjs: "react",
+        amd: "react"
+    }
   },
 
   output: {

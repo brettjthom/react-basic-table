@@ -1,10 +1,10 @@
-const React = require('react');
-const _ = require('underscore');
-const SimpleTablePaging = require('./paging.jsx');
-const filterTable = require('./filtering.jsx');
-const sortTable = require('./sorting.jsx');
+import React from 'react';
+import _ from 'underscore';
+import ReactBasicTablePaging from './paging';
+import filterTable from './filtering';
+import sortTable from './sorting';
 
-export default class SimpleTable extends React.Component {
+export default class ReactBasicTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -127,7 +127,7 @@ export default class SimpleTable extends React.Component {
                         </table>
                     </div>
                 </div>
-                <SimpleTablePaging numPages={this.state.numPages}
+                <ReactBasicTablePaging numPages={this.state.numPages}
                   page={this.state.page}
                   setPage={this.setPage.bind(this)}
                 />
@@ -136,7 +136,7 @@ export default class SimpleTable extends React.Component {
     }
 }
 
-SimpleTable.defaultProps = {
+ReactBasicTable.defaultProps = {
     rows: [],
     columns: [],
     pageSize: 10,
@@ -146,7 +146,7 @@ SimpleTable.defaultProps = {
     filterMode: 'Or',
 };
 
-SimpleTable.propTypes = {
+ReactBasicTable.propTypes = {
     rows: React.PropTypes.array,
     columns: React.PropTypes.array,
     pageSize: React.PropTypes.number,
@@ -155,5 +155,3 @@ SimpleTable.propTypes = {
     sort: React.PropTypes.array,
     filterMode: React.PropTypes.string,
 };
-
-module.exports = SimpleTable;

@@ -1,7 +1,7 @@
-const React = require('react');
-const classNames = require('classnames');
+import React from 'react';
+import classNames from 'classnames';
 
-class SimpleTablePaging extends React.Component {
+export default class ReactBasicTablePaging extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -86,12 +86,15 @@ class SimpleTablePaging extends React.Component {
     }
 }
 
-SimpleTablePaging.defaultProps = { page: 1, pageNum: 1, numPages: 1, setPage: { function() {} } };
-SimpleTablePaging.propTypes = {
+ReactBasicTablePaging.defaultProps = {
+    page: 1,
+    pageNum: 1,
+    numPages: 1,
+    setPage: { function() {} },
+};
+ReactBasicTablePaging.propTypes = {
     page: React.PropTypes.number,
     pageNum: React.PropTypes.number,
     numPages: React.PropTypes.number,
     setPage: React.PropTypes.func,
 };
-
-module.exports = SimpleTablePaging;
