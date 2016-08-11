@@ -5,7 +5,7 @@ var buildVar = process.argv.indexOf('-var') > -1;
 var minify = process.argv.indexOf('-p') > -1;
 
 // Different build types
-var outputName = 'lib/ReactBasicTable';
+var outputName = 'lib/react-basic-table';
 outputName = outputName + (buildVar ? '-var' : '');
 outputName = outputName + (minify ? '.min.js' : '.js');
 

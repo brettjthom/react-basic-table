@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactBasicTable from '../lib/ReactBasicTable';
+import ReactBasicTable from '../lib/react-basic-table';
 
 // Example 1
 var columns = ['Name', 'State', 'Age', 'Note'];

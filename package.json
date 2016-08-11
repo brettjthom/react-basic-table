@@ -1,5 +1,5 @@
 {
-  "name": "ReactBasicTable",
+  "name": "react-basic-table",
   "version": "1.0.0",
   "description": "",
   "main": "./lib/ReactBasicTable.js",
@@ -37,6 +37,6 @@
   "license": "MIT",
   "repository" : { 
     "type" : "git",
-    "url" : "https://github.com/brettjthom/ReactBasicTable.git"
+    "url" : "https://github.com/brettjthom/react-basic-table.git"
   }
 }

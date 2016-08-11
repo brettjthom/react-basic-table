@@ -62,9 +62,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ReactBasicTable = __webpack_require__(2);
+	var _reactBasicTable = __webpack_require__(2);
 
-	var _ReactBasicTable2 = _interopRequireDefault(_ReactBasicTable);
+	var _reactBasicTable2 = _interopRequireDefault(_reactBasicTable);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -138,7 +138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  '12'
 	), _react2.default.createElement('input', { type: 'text' })]];
 
-	_react2.default.render(_react2.default.createElement(_ReactBasicTable2.default, { columns: columns, rows: rows }), document.getElementById('Example1'));
+	_react2.default.render(_react2.default.createElement(_reactBasicTable2.default, { columns: columns, rows: rows }), document.getElementById('Example1'));
 
 	// Example 2
 	var i = 0;
@@ -165,7 +165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  rows.push(item);
 	}
 
-	_react2.default.render(_react2.default.createElement(_ReactBasicTable2.default, { columns: columns, rows: rows }), document.getElementById('Example2'));
+	_react2.default.render(_react2.default.createElement(_reactBasicTable2.default, { columns: columns, rows: rows }), document.getElementById('Example2'));
 
 	// Example 3
 
@@ -265,7 +265,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'Filter Mode - ' + this.state.filterMode
 	          )
 	        ),
-	        _react2.default.createElement(_ReactBasicTable2.default, { columns: this.props.columns, rows: this.props.rows, filter: this.state.filter, filterMode: this.state.filterMode })
+	        _react2.default.createElement(_reactBasicTable2.default, { columns: this.props.columns, rows: this.props.rows, filter: this.state.filter, filterMode: this.state.filterMode })
 	      );
 	    }
 	  }]);
@@ -276,7 +276,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	_react2.default.render(_react2.default.createElement(ReactBasicTableFiltering, { columns: columns, rows: rows }), document.getElementById('Example3'));
 
 	// Example 4
-	_react2.default.render(_react2.default.createElement(_ReactBasicTable2.default, { columns: columns, rows: rows, sort: [0, 2] }), document.getElementById('Example4'));
+	_react2.default.render(_react2.default.createElement(_reactBasicTable2.default, { columns: columns, rows: rows, sort: [0, 2] }), document.getElementById('Example4'));
 
 /***/ },
 /* 1 */
