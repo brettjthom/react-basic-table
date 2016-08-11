@@ -2,7 +2,7 @@
   "name": "react-basic-table",
   "version": "1.0.0",
   "description": "",
-  "main": "./lib/ReactBasicTable.js",
+  "main": "./lib/react-basic-table.js",
   "dependencies": {
     "react": "^0.13.3",
     "classnames": "^2.1.5",
