@@ -43,7 +43,7 @@ module.exports = {
   output: {
     filename: outputName,
     libraryTarget: buildVar ? 'var' : 'umd',
-    library: 'SimpleTable'
+    library: 'ReactBasicTable'
   },
 
   plugins: plugins,

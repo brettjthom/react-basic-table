@@ -27,7 +27,7 @@ module.exports = {
   output: {
     filename: './example/bundle.js',
     libraryTarget: 'umd',
-    library: 'SimpleTable'
+    library: 'ReactBasicTable'
   },
 
   plugins: [
