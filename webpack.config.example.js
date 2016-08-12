@@ -4,9 +4,6 @@ module.exports = {
   entry: './example/index.jsx',
 
   module: {
-    preLoaders: [
-      { test: /\.jsx?$/, include: /src/, loaders: ['eslint?{fix:true}']}
-    ],
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel', query: {
         presets: ['react', 'es2015'],
@@ -27,7 +24,7 @@ module.exports = {
   output: {
     filename: './example/bundle.js',
     libraryTarget: 'umd',
-    library: 'ReactBasicTable'
+    library: 'example'
   },
 
   plugins: [
