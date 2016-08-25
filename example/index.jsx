@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 import ReactBasicTable from '../lib/react-basic-table';
 
 // Example 1
@@ -36,7 +37,7 @@ var rows = [
 ],
 ];
 
-React.render(
+ReactDOM.render(
 <ReactBasicTable columns={columns} rows={rows} />,
 document.getElementById('Example1')
 );
@@ -55,7 +56,7 @@ var item = [
 rows.push(item);
 }
 
-React.render(
+ReactDOM.render(
 <ReactBasicTable columns={columns} rows={rows} />,
 document.getElementById('Example2')
 );
@@ -128,13 +129,13 @@ return (
 }
 }
 
-React.render(
+ReactDOM.render(
 <ReactBasicTableFiltering columns={columns} rows={rows} />,
 document.getElementById('Example3')
 );
 
 // Example 4
-React.render(
+ReactDOM.render(
 <ReactBasicTable columns={columns} rows={rows} sort={[0, 2]} />,
 document.getElementById('Example4')
 );
