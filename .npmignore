@@ -2,3 +2,5 @@ example
 src
 webpack.config.js
 webpack.config.example.js
+.eslintrc.js
+.npmignore
