@@ -26,7 +26,7 @@ module.exports = {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel', query: {
         presets: ['react', 'es2015'],
-        plugins: ["add-module-exports", "transform-es2015-modules-umd"]
+        plugins: ["add-module-exports"]
       } }
     ]
   },
