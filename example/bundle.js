@@ -81,65 +81,65 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Example 1
 	var columns = ['Name', 'State', 'Age', 'Note'];
 	var rows = [[_react2.default.createElement(
-	  'span',
-	  null,
-	  'Joe'
+	    'span',
+	    null,
+	    'Joe'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  'PA'
+	    'span',
+	    null,
+	    'PA'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  '22'
+	    'span',
+	    null,
+	    '22'
 	), _react2.default.createElement('input', { type: 'text' })], [_react2.default.createElement(
-	  'span',
-	  null,
-	  'Jim'
+	    'span',
+	    null,
+	    'Jim'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  'TX'
+	    'span',
+	    null,
+	    'TX'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  '55'
+	    'span',
+	    null,
+	    '55'
 	), _react2.default.createElement('input', { type: 'text' })], [_react2.default.createElement(
-	  'span',
-	  null,
-	  'John'
+	    'span',
+	    null,
+	    'John'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  'NJ'
+	    'span',
+	    null,
+	    'NJ'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  '34'
+	    'span',
+	    null,
+	    '34'
 	), _react2.default.createElement('input', { type: 'text' })], [_react2.default.createElement(
-	  'span',
-	  null,
-	  'Sam'
+	    'span',
+	    null,
+	    'Sam'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  'CA'
+	    'span',
+	    null,
+	    'CA'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  '68'
+	    'span',
+	    null,
+	    '68'
 	), _react2.default.createElement('input', { type: 'text' })], [_react2.default.createElement(
-	  'span',
-	  null,
-	  'Steve'
+	    'span',
+	    null,
+	    'Steve'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  'NY'
+	    'span',
+	    null,
+	    'NY'
 	), _react2.default.createElement(
-	  'span',
-	  null,
-	  '12'
+	    'span',
+	    null,
+	    '12'
 	), _react2.default.createElement('input', { type: 'text' })]];
 
 	_reactDom2.default.render(_react2.default.createElement(_reactBasicTable2.default, { columns: columns, rows: rows }), document.getElementById('Example1'));
@@ -148,25 +148,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	var i = 0;
 	var rows = [];
 	for (i = 0; i <= 2000; i++) {
-	  var item = [_react2.default.createElement(
-	    'span',
-	    { 'data-ReactBasicTable-value': 'Row' + i },
-	    'Row' + i
-	  ), _react2.default.createElement(
-	    'span',
-	    { 'data-ReactBasicTable-value': 'Test' + i },
-	    'Test' + i
-	  ), _react2.default.createElement(
-	    'span',
-	    { 'data-ReactBasicTable-value': 'Testing' + i },
-	    'Testing' + i
-	  ), _react2.default.createElement(
-	    'span',
-	    { 'data-ReactBasicTable-value': 'End' + i },
-	    'End' + i
-	  )];
+	    var item = [_react2.default.createElement(
+	        'span',
+	        { 'data-ReactBasicTable-value': 'Row' + i },
+	        'Row' + i
+	    ), _react2.default.createElement(
+	        'span',
+	        { 'data-ReactBasicTable-value': 'Test' + i },
+	        'Test' + i
+	    ), _react2.default.createElement(
+	        'span',
+	        { 'data-ReactBasicTable-value': 'Testing' + i },
+	        'Testing' + i
+	    ), _react2.default.createElement(
+	        'span',
+	        { 'data-ReactBasicTable-value': 'End' + i },
+	        'End' + i
+	    )];
 
-	  rows.push(item);
+	    rows.push(item);
 	}
 
 	_reactDom2.default.render(_react2.default.createElement(_reactBasicTable2.default, { columns: columns, rows: rows }), document.getElementById('Example2'));
@@ -174,107 +174,107 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Example 3
 
 	var ReactBasicTableFiltering = function (_React$Component) {
-	  _inherits(ReactBasicTableFiltering, _React$Component);
+	    _inherits(ReactBasicTableFiltering, _React$Component);
 
-	  function ReactBasicTableFiltering(props) {
-	    _classCallCheck(this, ReactBasicTableFiltering);
+	    function ReactBasicTableFiltering(props) {
+	        _classCallCheck(this, ReactBasicTableFiltering);
 
-	    var _this = _possibleConstructorReturn(this, (ReactBasicTableFiltering.__proto__ || Object.getPrototypeOf(ReactBasicTableFiltering)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (ReactBasicTableFiltering.__proto__ || Object.getPrototypeOf(ReactBasicTableFiltering)).call(this, props));
 
-	    _this.state = { filter: [{
-	        id: 0,
-	        match: ''
-	      }, {
-	        id: 1,
-	        match: ''
-	      }, {
-	        id: 2,
-	        match: ''
-	      }, {
-	        id: 3,
-	        match: ''
-	      }], filterMode: 'Or' };
-	    return _this;
-	  }
-
-	  _createClass(ReactBasicTableFiltering, [{
-	    key: 'changeFilter',
-	    value: function changeFilter(column, event) {
-	      var newFilter = this.state.filter.slice();
-	      newFilter[column].match = event.target.value;
-	      this.setState({ filter: newFilter });
+	        _this.state = { filter: [{
+	                id: 0,
+	                match: ''
+	            }, {
+	                id: 1,
+	                match: ''
+	            }, {
+	                id: 2,
+	                match: ''
+	            }, {
+	                id: 3,
+	                match: ''
+	            }], filterMode: 'Or'
+	        };
+	        return _this;
 	    }
-	  }, {
-	    key: 'changeMode',
-	    value: function changeMode() {
-	      debugger;
-	      if (this.state.filterMode == 'Or') {
-	        this.setState({ filterMode: 'And' });
-	      } else {
-	        this.setState({ filterMode: 'Or' });
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'form',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'filterColumn0' },
-	              'Column 0'
-	            ),
-	            _react2.default.createElement('input', { onChange: this.changeFilter.bind(this, 0), className: 'form-control', id: 'filterColumn0', placeholder: 'Filter' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'filterColumn1' },
-	              'Column 1'
-	            ),
-	            _react2.default.createElement('input', { onChange: this.changeFilter.bind(this, 1), className: 'form-control', id: 'filterColumn1', placeholder: 'Filter' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'filterColumn2' },
-	              'Column 2'
-	            ),
-	            _react2.default.createElement('input', { onChange: this.changeFilter.bind(this, 2), className: 'form-control', id: 'filterColumn2', placeholder: 'Filter' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'filterColumn3' },
-	              'Column 3'
-	            ),
-	            _react2.default.createElement('input', { onChange: this.changeFilter.bind(this, 3), className: 'form-control', id: 'filterColumn3', placeholder: 'Filter' })
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { type: 'button', className: 'btn', onClick: this.changeMode.bind(this) },
-	            'Filter Mode - ' + this.state.filterMode
-	          )
-	        ),
-	        _react2.default.createElement(_reactBasicTable2.default, { columns: this.props.columns, rows: this.props.rows, filter: this.state.filter, filterMode: this.state.filterMode })
-	      );
-	    }
-	  }]);
 
-	  return ReactBasicTableFiltering;
+	    _createClass(ReactBasicTableFiltering, [{
+	        key: 'changeFilter',
+	        value: function changeFilter(column, event) {
+	            var newFilter = this.state.filter.slice();
+	            newFilter[column].match = event.target.value;
+	            this.setState({ filter: newFilter });
+	        }
+	    }, {
+	        key: 'changeMode',
+	        value: function changeMode() {
+	            if (this.state.filterMode == 'Or') {
+	                this.setState({ filterMode: 'And' });
+	            } else {
+	                this.setState({ filterMode: 'Or' });
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'form',
+	                    null,
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'filterColumn0' },
+	                            'Column 0'
+	                        ),
+	                        _react2.default.createElement('input', { onChange: this.changeFilter.bind(this, 0), className: 'form-control', id: 'filterColumn0', placeholder: 'Filter' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'filterColumn1' },
+	                            'Column 1'
+	                        ),
+	                        _react2.default.createElement('input', { onChange: this.changeFilter.bind(this, 1), className: 'form-control', id: 'filterColumn1', placeholder: 'Filter' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'filterColumn2' },
+	                            'Column 2'
+	                        ),
+	                        _react2.default.createElement('input', { onChange: this.changeFilter.bind(this, 2), className: 'form-control', id: 'filterColumn2', placeholder: 'Filter' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'filterColumn3' },
+	                            'Column 3'
+	                        ),
+	                        _react2.default.createElement('input', { onChange: this.changeFilter.bind(this, 3), className: 'form-control', id: 'filterColumn3', placeholder: 'Filter' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'button',
+	                        { type: 'button', className: 'btn', onClick: this.changeMode.bind(this) },
+	                        'Filter Mode - ' + this.state.filterMode
+	                    )
+	                ),
+	                _react2.default.createElement(_reactBasicTable2.default, { columns: this.props.columns, rows: this.props.rows, filter: this.state.filter, filterMode: this.state.filterMode })
+	            );
+	        }
+	    }]);
+
+	    return ReactBasicTableFiltering;
 	}(_react2.default.Component);
 
 	_reactDom2.default.render(_react2.default.createElement(ReactBasicTableFiltering, { columns: columns, rows: rows }), document.getElementById('Example3'));
@@ -419,25 +419,40 @@ return /******/ (function(modules) { // webpackBootstrap
 	var cachedSetTimeout;
 	var cachedClearTimeout;
 
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
 	(function () {
 	    try {
-	        cachedSetTimeout = setTimeout;
-	    } catch (e) {
-	        cachedSetTimeout = function () {
-	            throw new Error('setTimeout is not defined');
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
 	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
 	    }
 	    try {
-	        cachedClearTimeout = clearTimeout;
-	    } catch (e) {
-	        cachedClearTimeout = function () {
-	            throw new Error('clearTimeout is not defined');
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
 	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
 	    }
 	} ())
 	function runTimeout(fun) {
 	    if (cachedSetTimeout === setTimeout) {
 	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
 	        return setTimeout(fun, 0);
 	    }
 	    try {
@@ -458,6 +473,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	function runClearTimeout(marker) {
 	    if (cachedClearTimeout === clearTimeout) {
 	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
 	        return clearTimeout(marker);
 	    }
 	    try {
@@ -14556,7 +14576,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (x === y) {
 	    // Steps 1-5, 7-10
 	    // Steps 6.b-6.e: +0 != -0
-	    return x !== 0 || 1 / x === 1 / y;
+	    // Added the nonzero y check to make Flow happy, but it is redundant
+	    return x !== 0 || y !== 0 || 1 / x === 1 / y;
 	  } else {
 	    // Step 6.a: NaN == NaN
 	    return x !== x && y !== y;
@@ -19970,7 +19991,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	(function webpackUniversalModuleDefinition(root, factory) {
 		if (( false ? 'undefined' : _typeof(exports)) === 'object' && ( false ? 'undefined' : _typeof(module)) === 'object') module.exports = factory(__webpack_require__(1));else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ((typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object') exports["ReactBasicTable"] = factory(require("react"));else root["ReactBasicTable"] = factory(root["React"]);
