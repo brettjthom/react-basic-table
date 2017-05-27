@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from 'underscore';
+import { isEqual } from 'lodash';
 import ReactBasicTablePaging from './paging';
 import filterTable from './filtering';
 import sortTable from './sorting';
@@ -34,7 +34,7 @@ export default class ReactBasicTable extends React.Component {
         }
         this.setState({ displayRows });
         this.setState({ numPages: Math.ceil(displayRows.length / nextProps.pageSize) });
-        if (!_.isEqual(this.props.filter, nextProps.filter)) {
+        if (!isEqual(this.props.filter, nextProps.filter)) {
             this.setState({ page: 1 });
         }
     }
