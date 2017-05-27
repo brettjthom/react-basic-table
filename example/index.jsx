@@ -1,56 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import ReactBasicTable from '../lib/react-basic-table';
+import Chance from 'chance';
+
+const chance = new Chance();
 
 // Example 1
-var columns = ['Name', 'State', 'Age', 'Note'];
-var rows = [
-    [
-        <span>Joe</span>,
-        <span>PA</span>,
-        <span>22</span>,
-        <input type="text" />
-    ],
-    [
-        <span>Jim</span>,
-        <span>TX</span>,
-        <span>55</span>,
-        <input type="text" />
-    ],
-    [
-        <span>John</span>,
-        <span>NJ</span>,
-        <span>34</span>,
-        <input type="text" />
-    ],
-    [
-        <span>Sam</span>,
-        <span>CA</span>,
-        <span>68</span>,
-        <input type="text" />
-    ],
-    [
-        <span>Steve</span>,
-        <span>NY</span>,
-        <span>12</span>,
-        <input type="text" />
-    ]
-];
-
-ReactDOM.render(
-    <ReactBasicTable columns={columns} rows={rows} />,
-    document.getElementById('Example1')
-);
-
-// Example 2
 var i = 0;
+var columns = ['Name', 'Age', 'DOB', 'Note'];
 var rows = [];
 for (i = 0; i <= 2000; i++) {
+    const age = chance.age();
+    const name = chance.name();
+    const dob = chance.birthday({string: true});
+    const note = chance.sentence();
     var item = [
-        <span data-ReactBasicTable-value={'Row' + i}>{'Row' + i}</span>,
-        <span data-ReactBasicTable-value={'Test' + i}>{'Test' + i}</span>,
-        <span data-ReactBasicTable-value={'Testing' + i}>{'Testing' + i}</span>,
-        <span data-ReactBasicTable-value={'End' + i}>{'End' + i}</span>
+        <span data-ReactBasicTable-value={name}>{name}</span>,
+        <span data-ReactBasicTable-value={age.toString()}>{age}</span>,
+        <span data-ReactBasicTable-value={dob}>{dob}</span>,
+        <span data-ReactBasicTable-value={note}>{note}</span>
     ];
 
     rows.push(item);
@@ -58,10 +26,10 @@ for (i = 0; i <= 2000; i++) {
 
 ReactDOM.render(
     <ReactBasicTable columns={columns} rows={rows} />,
-    document.getElementById('Example2')
+    document.getElementById('Example1')
 );
 
-// Example 3
+// Example 2
 class ReactBasicTableFiltering extends React.Component {
     constructor(props) {
         super(props);
@@ -131,11 +99,11 @@ class ReactBasicTableFiltering extends React.Component {
 
 ReactDOM.render(
     <ReactBasicTableFiltering columns={columns} rows={rows} />,
-    document.getElementById('Example3')
+    document.getElementById('Example2')
 );
 
-// Example 4
+// Example 3
 ReactDOM.render(
-    <ReactBasicTable columns={columns} rows={rows} sort={[0, 2]} />,
-    document.getElementById('Example4')
+    <ReactBasicTable columns={columns} rows={rows} sort={[0, 1, 2]} />,
+    document.getElementById('Example3')
 );
