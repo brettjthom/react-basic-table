@@ -7,7 +7,7 @@ import PagingLast from './paging-last';
 import PagingEllipsesLeft from './paging-ellipses-left';
 import PagingEllipsesRight from './paging-ellipses-right';
 
-export default class Paging extends React.Component {
+export default class PagingMain extends React.Component {
     setPage(page, e) {
         if (page < 1 || page > this.props.numPages) {
             return;
@@ -71,12 +71,12 @@ export default class Paging extends React.Component {
     }
 }
 
-Paging.defaultProps = {
+PagingMain.defaultProps = {
     page: 1,
     numPages: 1,
     setPage: { function() {} },
 };
-Paging.propTypes = {
+PagingMain.propTypes = {
     page: PropTypes.number,
     numPages: PropTypes.number,
     setPage: PropTypes.func,
