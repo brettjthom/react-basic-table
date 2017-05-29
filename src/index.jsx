@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { isArrayEqual } from './utils.js';
-import ReactBasicTablePaging from './paging';
+import PagingMain from './paging-main';
 import filterTable from './filtering';
 import sortTable from './sorting';
 
@@ -103,7 +103,7 @@ export default class ReactBasicTable extends React.Component {
                         </table>
                     </div>
                 </div>
-                <ReactBasicTablePaging page={this.state.page}
+                <PagingMain page={this.state.page}
                   numPages={Math.ceil(filteredRows.length / this.props.pageSize)}
                   setPage={this.setPage.bind(this)}
                 />

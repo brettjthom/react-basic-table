@@ -8,6 +8,7 @@ module.exports = {
     "react/jsx-first-prop-new-line": [ 2, "never" ], // Stop crazy lined components
     "no-underscore-dangle": "off", // Allow underscores for (var|func)s?
     "react/jsx-no-bind": "off", // Ignore binded params for now
+    "react/prefer-stateless-function": [0],
     "arrow-body-style": "off" // Arrow body functions differ
   },
   "settings": {
