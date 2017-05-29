@@ -1,5 +1,5 @@
-import React from 'react';
-import { isEqual } from 'lodash';
+import React, { PropTypes } from 'react';
+import { isArrayEqual } from './utils.js';
 import ReactBasicTablePaging from './paging';
 import filterTable from './filtering';
 import sortTable from './sorting';
@@ -10,31 +10,13 @@ export default class ReactBasicTable extends React.Component {
         this.state = {
             page: 1,
             numPages: 1,
-            displayRows: [],
             sortedBy: {},
         };
     }
 
-    componentWillMount() {
-        // Filter if you receive the filer prop
-        let displayRows = this.props.rows;
-        if (this.props.filter.length > 0 && this.props.rows.length > 0) {
-            displayRows = filterTable(this.props.rows, this.props.filter, this.props.filterMode);
-        }
-        this.setState({ displayRows });
-        this.setState({ numPages: Math.ceil(displayRows.length / this.props.pageSize) });
-        this.setState({ page: 1 });
-    }
-
     componentWillReceiveProps(nextProps) {
-        // Filter if you receive the filer prop
-        let displayRows = nextProps.rows;
-        if (nextProps.filter.length > 0 && nextProps.rows.length > 0) {
-            displayRows = filterTable(nextProps.rows, nextProps.filter, nextProps.filterMode);
-        }
-        this.setState({ displayRows });
-        this.setState({ numPages: Math.ceil(displayRows.length / nextProps.pageSize) });
-        if (!isEqual(this.props.filter, nextProps.filter)) {
+        // New props... reset to page 1
+        if (!isArrayEqual(this.props.filter, nextProps.filter)) {
             this.setState({ page: 1 });
         }
     }
@@ -44,6 +26,11 @@ export default class ReactBasicTable extends React.Component {
     }
 
     sortColumn(index) {
+        // if column is not a sortable column... return
+        if (this.props.sort.indexOf(index) === -1) {
+            return;
+        }
+
         if (this.state.sortedBy.column !== index) {
             this.setState({ sortedBy: { column: index, mode: 'Asc' } });
         } else {
@@ -56,16 +43,6 @@ export default class ReactBasicTable extends React.Component {
     render() {
         let items;
         const headers = this.props.columns.map((header, index) => {
-            if (this.props.sort.indexOf(index) === -1) {
-                return (
-                    <th key={`header${index}`}
-                      style={this.props.hideColumns.indexOf(index) !== -1 ?
-                            { display: 'none' } : {}}
-                    >
-                        {header}
-                    </th>
-                );
-            }
             return (
                 <th key={`header${index}`}
                   style={this.props.hideColumns.indexOf(index) !== -1 ?
@@ -76,31 +53,30 @@ export default class ReactBasicTable extends React.Component {
             );
         });
 
-        let rows = sortTable(this.state.displayRows, this.state.sortedBy).map((row, index) => {
-            if (index < (this.state.page - 1) * this.props.pageSize) {
-                return null;
-            }
-            if (index >= (this.state.page) * this.props.pageSize) {
-                return null;
-            }
+        // Apply the filter criteria
+        const filteredRows = filterTable(this.props.rows, this.props.filter, this.props.filterMode);
 
-            items = row.map((td, tdIndex) => {
+        // Sort the rows for the final render
+        let rows = sortTable(filteredRows, this.state.sortedBy)
+            .slice((this.state.page - 1) * this.props.pageSize,
+                this.state.page * this.props.pageSize)
+            .map((row, index) => {
+                items = row.map((td, tdIndex) => {
+                    return (
+                        <td key={`row${index}item${tdIndex}`}
+                          style={this.props.hideColumns.indexOf(tdIndex) !== -1 ?
+                                { display: 'none' } : {}}
+                        >
+                            {td}
+                        </td>
+                    );
+                });
                 return (
-                    <td key={`row${index}item${tdIndex}`}
-                      style={this.props.hideColumns.indexOf(tdIndex) !== -1 ?
-                            { display: 'none' } : {}}
-                    >
-                        {td}
-                    </td>
+                    <tr key={`row${index}`}>
+                        {items}
+                    </tr>
                 );
             });
-            return (
-                <tr key={`row${index}`}>
-                    {items}
-                </tr>
-            );
-        });
-
 
         if (rows.length === 0) {
             rows =
@@ -127,8 +103,8 @@ export default class ReactBasicTable extends React.Component {
                         </table>
                     </div>
                 </div>
-                <ReactBasicTablePaging numPages={this.state.numPages}
-                  page={this.state.page}
+                <ReactBasicTablePaging page={this.state.page}
+                  numPages={Math.ceil(filteredRows.length / this.props.pageSize)}
                   setPage={this.setPage.bind(this)}
                 />
             </div>
@@ -147,11 +123,11 @@ ReactBasicTable.defaultProps = {
 };
 
 ReactBasicTable.propTypes = {
-    rows: React.PropTypes.array,
-    columns: React.PropTypes.array,
-    pageSize: React.PropTypes.number,
-    hideColumns: React.PropTypes.array,
-    filter: React.PropTypes.array,
-    sort: React.PropTypes.array,
-    filterMode: React.PropTypes.string,
+    rows: PropTypes.array,
+    columns: PropTypes.array,
+    pageSize: PropTypes.number,
+    hideColumns: PropTypes.array,
+    filter: PropTypes.array,
+    sort: PropTypes.array,
+    filterMode: PropTypes.string,
 };
