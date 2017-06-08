@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import PagingNext from './paging-next';
 import PagingPrevious from './paging-previous';
 import PagingNumber from './paging-number';
@@ -22,12 +23,13 @@ export default class PagingMain extends React.Component {
 
         // Create individual numbers
         for (i = this.props.page - 2; i <= this.props.page + 2; i++) {
-            if (i < 1 || i > this.props.numPages) {
+            if (i < 2 || i > this.props.numPages - 1) {
                 continue;
             }
 
             pagingNumbers.push(
-                <PagingNumber page={this.props.page}
+                <PagingNumber key={i}
+                  page={this.props.page}
                   index={i}
                   numPages={this.props.numPages}
                   setPage={this.props.setPage.bind(this)}

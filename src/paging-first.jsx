@@ -1,13 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import PagingNumber from './paging-number';
 
 export default class PagingFirst extends React.Component {
     render() {
-        if (this.props.page <= 3) {
-            return null;
-        }
         return (
-            <PagingNumber page={this.props.page}
+            <PagingNumber key={1}
+              page={this.props.page}
               index={1}
               numPages={this.props.numPages}
               setPage={this.props.setPage.bind(this)}

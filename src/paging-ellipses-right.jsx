@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class PagingEllipsesRight extends React.Component {
     render() {
-        if (this.props.numPages <= this.props.page + 2) {
+        if (this.props.numPages <= this.props.page + 3) {
             return null;
         }
         return (

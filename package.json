@@ -1,23 +1,25 @@
 {
   "name": "react-basic-table",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "",
   "main": "./lib/react-basic-table.js",
   "dependencies": {
     "classnames": "^2.1.5",
     "lodash": "^4.17.4",
-    "natsort": "^1.0.6",
-    "react": "~15.1.0"
+    "natsort": "^1.0.6"
   },
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-core": "^6.13.2",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "bootstrap": "^3.3.7",
+    "chai": "^4.0.2",
     "chance": "^1.0.9",
+    "enzyme": "^2.8.2",
     "eslint": "~2.11.1",
     "eslint-config-airbnb": "~9.0.1",
     "eslint-import-resolver-webpack": "~0.4.0",
@@ -25,14 +27,19 @@
     "eslint-plugin-import": "~1.12.0",
     "eslint-plugin-jsx-a11y": "~1.3.0",
     "eslint-plugin-react": "~5.1.1",
-    "react-dom": "~15.1.0",
+    "jest": "^20.0.4",
+    "prop-types": "^15.5.10",
+    "react": "~15.5.0",
+    "react-dom": "^15.5.0",
+    "react-test-renderer": "^15.5.4",
     "webpack": "^1.12.2"
   },
   "scripts": {
     "build-all": "npm run build && npm run build-example",
     "build": "node ./node_modules/webpack/bin/webpack.js && node ./node_modules/webpack/bin/webpack.js -p -d && node ./node_modules/webpack/bin/webpack.js -var -p -d",
     "build-example": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.example.js",
-    "lint": "eslint --fix ./src/**"
+    "lint": "eslint --fix ./src/**",
+    "test": "jest"
   },
   "author": "Brett Thom",
   "license": "MIT",
