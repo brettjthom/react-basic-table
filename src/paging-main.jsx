@@ -9,14 +9,11 @@ import PagingEllipsesLeft from './paging-ellipses-left';
 import PagingEllipsesRight from './paging-ellipses-right';
 
 export default class PagingMain extends React.Component {
-    setPage(page, e) {
-        if (page < 1 || page > this.props.numPages) {
-            return;
-        }
-        this.props.setPage(page);
-        e.preventDefault();
-    }
+    constructor(props) {
+        super(props);
 
+        this.setPage = this.props.setPage.bind(this);
+    }
     render() {
         let i = 1;
         let pagingNumbers = [];
@@ -32,7 +29,7 @@ export default class PagingMain extends React.Component {
                   page={this.props.page}
                   index={i}
                   numPages={this.props.numPages}
-                  setPage={this.props.setPage.bind(this)}
+                  setPage={this.setPage}
                 />
             );
         }
@@ -44,11 +41,11 @@ export default class PagingMain extends React.Component {
                         <ul className="pagination">
                             <PagingPrevious page={this.props.page}
                               numPages={this.props.numPages}
-                              setPage={this.props.setPage.bind(this)}
+                              setPage={this.setPage}
                             />
                             <PagingFirst page={this.props.page}
                               numPages={this.props.numPages}
-                              setPage={this.props.setPage.bind(this)}
+                              setPage={this.setPage}
                             />
                             <PagingEllipsesLeft page={this.props.page}
                               numPages={this.props.numPages}
@@ -59,11 +56,11 @@ export default class PagingMain extends React.Component {
                             />
                             <PagingLast page={this.props.page}
                               numPages={this.props.numPages}
-                              setPage={this.props.setPage.bind(this)}
+                              setPage={this.setPage}
                             />
                             <PagingNext page={this.props.page}
                               numPages={this.props.numPages}
-                              setPage={this.props.setPage.bind(this)}
+                              setPage={this.setPage}
                             />
                         </ul>
                     </div>

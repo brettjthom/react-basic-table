@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isArrayEqual } from './utils.js';
+import { isArrayOfObjectsEqual } from './utils.js';
 import PagingMain from './paging-main';
 import filterTable from './filtering';
 import sortTable from './sorting';
+import classNames from 'classnames';
 
 export default class ReactBasicTable extends React.Component {
     constructor(props) {
@@ -16,8 +17,8 @@ export default class ReactBasicTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        // New props... reset to page 1
-        if (!isArrayEqual(this.props.filter, nextProps.filter)) {
+        // New filter... reset to page 1
+        if (!isArrayOfObjectsEqual(this.props.filter, nextProps.filter)) {
             this.setState({ page: 1 });
         }
     }
@@ -42,31 +43,31 @@ export default class ReactBasicTable extends React.Component {
     }
 
     render() {
-        let items;
         const headers = this.props.columns.map((header, index) => {
+            const hideColumn = this.props.hideColumns.indexOf(index) !== -1;
             return (
                 <th key={`header${index}`}
-                  style={this.props.hideColumns.indexOf(index) !== -1 ?
-                        { display: 'none' } : {}} onClick={this.sortColumn.bind(this, index)}
+                  className={classNames({ hidden: hideColumn })}
+                  style={hideColumn ? { display: 'none' } : {}}
+                  onClick={this.sortColumn.bind(this, index)}
                 >
                     {header}
                 </th>
             );
         });
 
-        // Apply the filter criteria
+        // Filter/Sort the rows for the final render
         const filteredRows = filterTable(this.props.rows, this.props.filter, this.props.filterMode);
-
-        // Sort the rows for the final render
         let rows = sortTable(filteredRows, this.state.sortedBy)
             .slice((this.state.page - 1) * this.props.pageSize,
                 this.state.page * this.props.pageSize)
             .map((row, index) => {
-                items = row.map((td, tdIndex) => {
+                const items = row.map((td, tdIndex) => {
+                    const hideColumn = this.props.hideColumns.indexOf(tdIndex) !== -1;
                     return (
                         <td key={`row${index}item${tdIndex}`}
-                          style={this.props.hideColumns.indexOf(tdIndex) !== -1 ?
-                                { display: 'none' } : {}}
+                          className={classNames({ hidden: hideColumn })}
+                          style={hideColumn ? { display: 'none' } : {}}
                         >
                             {td}
                         </td>
@@ -82,7 +83,7 @@ export default class ReactBasicTable extends React.Component {
         if (rows.length === 0) {
             rows =
                 (<tr key={"rowempty"}>
-                    <td valign="top" colSpan={headers.length} className="dataTables_empty">
+                    <td colSpan={headers.length} className="dataTables_empty">
                         No matching records found.
                     </td>
                 </tr>);

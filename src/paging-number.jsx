@@ -4,14 +4,17 @@ import classNames from 'classnames';
 
 export default class PagingNumber extends React.Component {
     setPage(page, e) {
-        if (page < 1 || page > this.props.numPages) {
+        if (page === this.props.page
+            || page < 1
+            || page > this.props.numPages
+            || page === this.props.page) {
             return;
         }
         this.props.setPage(page);
         e.preventDefault();
     }
     render() {
-        const numberClassName = classNames('paginate_button',
+        const numberClassName = classNames('paginate_button', 'paging-number',
             { disabled: this.props.page === this.props.index });
         return (
             <li key={`paging${this.props.index}`} className={numberClassName}>
