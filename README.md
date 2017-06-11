@@ -4,7 +4,7 @@
 [![npm](http://img.shields.io/npm/dm/react-basic-table.svg)](https://npmjs.org/package/react-basic-table)
 [![build status](https://travis-ci.org/brettjthom/react-basic-table.svg?branch=master)](https://travis-ci.org/brettjthom/react-basic-table)
 
-React basic table is a basic table library which handles basic table functions like paging, sorting, and fitering for you.
+React basic table is a basic table library which handles basic table functions like paging, sorting, and filtering for you.
 
 ## Usage
 
