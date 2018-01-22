@@ -42,9 +42,10 @@ render() {
 | rows | An array of rows. Every in this array is an array of components. This way you can render inputs and other components into the table. | ```[]``` | ``` [[<span>Joe</span> ],[<span>John</span>]]```
 | columns | An array of strings that are the names of the column.  | ```[]``` | ```['Name']``` |
 | pageSize | The number of rows on a page. | 10 | 15 |
-| hideColumns | An array of column indexes that you want to hide. You can still filter on this column. | ```[]``` | ```[1]``` | 
+| hideColumns | An array of column indexes that you want to hide. You can still filter on this column. | ```[]``` | ```[1]``` |
 | filter | An array of objects ({id, match}) that define filter criteria and column index. To use this you need to define a ```data-ReactBasicTable-value``` on the components in the row prop. This allows filtering on all components. | ```[]``` | ```[{id: 0, match: 'John'}]``` |
-| filterMode | An 'Or' or 'And' is accepting here. It is used in the filtering logic. In the case of 'Or' only one of the filter criteria needs to be true and in the case of 'And' they all need to be true. | ```'Or'``` | ```'And'``` |
+| filterMode | An 'Or' or 'And' is accepting here. It is used in the filtering logic. In the case of 'Or' only one of the filter criteria needs to be true and in the case of 'And' they all need to be true. You can also pass 'Fuction' here to use advanced filtering logic declared in a function. See 'filterFunction' prop | ```'Or'``` | ```'And'``` |
+| filterFunction | A function used when 'filterMode' is 'Function'. This function takes an  array of values and returns a bool if field passes the filter. ` (...values) => { return values[0] === 'OneA'; } ` | Empty function | ```'And'``` | ` (...values) => { return values[0] === 'OneA'; } ` |
 | sort | An array of column indexes that you want to be sortable. To use this you need to define a ```data-ReactBasicTable-value``` on the components in the row prop. This allows filtering on all components. | ```[]``` | ```[1]``` |
 
 ## Examples

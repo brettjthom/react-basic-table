@@ -1,6 +1,6 @@
 {
   "name": "react-basic-table",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "./lib/react-basic-table.js",
   "dependencies": {

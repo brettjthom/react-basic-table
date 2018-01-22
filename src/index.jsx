@@ -57,7 +57,10 @@ export default class ReactBasicTable extends React.Component {
         });
 
         // Filter/Sort the rows for the final render
-        const filteredRows = filterTable(this.props.rows, this.props.filter, this.props.filterMode);
+        const filteredRows = filterTable(this.props.rows,
+            this.props.filter,
+            this.props.filterFunction,
+            this.props.filterMode);
         let rows = sortTable(filteredRows, this.state.sortedBy)
             .slice((this.state.page - 1) * this.props.pageSize,
                 this.state.page * this.props.pageSize)
@@ -122,6 +125,7 @@ ReactBasicTable.defaultProps = {
     filter: [],
     sort: [],
     filterMode: 'Or',
+    filterFunction: () => {},
 };
 
 ReactBasicTable.propTypes = {
@@ -132,4 +136,5 @@ ReactBasicTable.propTypes = {
     filter: PropTypes.array,
     sort: PropTypes.array,
     filterMode: PropTypes.string,
+    filterFunction: PropTypes.func,
 };
