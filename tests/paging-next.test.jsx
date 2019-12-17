@@ -50,3 +50,12 @@ test('PagingNext is not disabled when at max page', () => {
   element.find('a');
   expect(element.find('.next').hasClass('disabled')).to.equal(false)
 });
+
+test('PagingNext is disabled when theres no pages', () => {
+  const onClick = sinon.spy();
+  const element = mount(
+    <PagingNext page={5} numPages={0} setPage={onClick} />
+  );
+  element.find('a');
+  expect(element.find('.next').hasClass('disabled')).to.equal(true)
+});

@@ -50,3 +50,12 @@ test('PagingPrevious is not disabled when at first page', () => {
   element.find('a');
   expect(element.find('.previous').hasClass('disabled')).to.equal(false)
 });
+
+test('PagingPrevious is disabled when theres no pages', () => {
+  const onClick = sinon.spy();
+  const element = mount(
+    <PagingPrevious page={5} numPages={0} setPage={onClick} />
+  );
+  element.find('a');
+  expect(element.find('.previous').hasClass('disabled')).to.equal(true)
+});

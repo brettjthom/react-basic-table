@@ -12,7 +12,7 @@ export default class PagingNext extends React.Component {
 
     render() {
         const nextClass = classNames('paginate_button', 'next',
-            { disabled: this.props.page === this.props.numPages });
+            { disabled: this.props.page === this.props.numPages || this.props.numPages === 0 });
 
         return (
             <li key="paging-next" className={nextClass}>

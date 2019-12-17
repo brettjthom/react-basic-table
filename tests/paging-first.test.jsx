@@ -43,3 +43,15 @@ test('PagingFirst renders ONE PagingNumber', () => {
   );
   expect(element.find(PagingNumber).length === 1).to.equal(true);
 });
+
+test('PagingFirst does not render with no page', () => {
+  const onClick = sinon.spy();
+  let element = mount(
+    <PagingFirst page={0} numPages={0} setPage={onClick} />
+  );
+  expect(element.isEmptyRender()).to.equal(true);
+  element = mount(
+    <PagingFirst page={1} numPages={1} setPage={onClick} />
+  );
+  expect(element.isEmptyRender()).to.equal(false);
+});

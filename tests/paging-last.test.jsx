@@ -43,3 +43,15 @@ test('PagingLast renders ONE PagingNumber', () => {
   );
   expect(element.find(PagingNumber).length).to.equal(1);
 });
+
+test('PagingLast does not render with no page', () => {
+  const onClick = sinon.spy();
+  let element = mount(
+    <PagingLast page={0} numPages={0} setPage={onClick} />
+  );
+  expect(element.isEmptyRender()).to.equal(true);
+  element = mount(
+    <PagingLast page={1} numPages={1} setPage={onClick} />
+  );
+  expect(element.isEmptyRender()).to.equal(false);
+});

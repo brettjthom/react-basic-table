@@ -56,7 +56,10 @@ class ReactBasicTableFiltering extends React.Component {
 
     changeFilter(column, event) {
         var newFilter = this.state.filter.slice();
-        newFilter[column].match = event.target.value;
+        newFilter[column] = {
+            id: newFilter[column].id,
+            match: event.target.value
+        };
         this.setState({ filter: newFilter });
     }
 

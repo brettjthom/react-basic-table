@@ -12,7 +12,7 @@ export default class PagingPrevious extends React.Component {
 
     render() {
         const previousClass = classNames('paginate_button', 'previous',
-            { disabled: this.props.page === 1 });
+            { disabled: this.props.page === 1 || this.props.numPages === 0 });
 
         return (
             <li key="paging-previous" className={previousClass}>

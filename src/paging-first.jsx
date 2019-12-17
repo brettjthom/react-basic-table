@@ -4,6 +4,7 @@ import PagingNumber from './paging-number';
 
 export default class PagingFirst extends React.Component {
     render() {
+        if (this.props.numPages === 0) return null;
         return (
             <PagingNumber key={1}
               page={this.props.page}
