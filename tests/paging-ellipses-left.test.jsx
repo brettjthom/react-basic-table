@@ -1,7 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import { expect } from 'chai';
 import PagingEllipsesLeft from '../src/paging-ellipses-left';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 test('PagingEllipsesLeft shows if after page 4', () => {
   const element = mount(

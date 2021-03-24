@@ -1,31 +1,20 @@
-var webpack = require('webpack');
-
 module.exports = {
   entry: './example/index.jsx',
 
   module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' }
+    rules: [
+      { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' }
     ]
   },
 
   output: {
     filename: './example/bundle.js',
+    path: __dirname,
     libraryTarget: 'umd',
     library: 'example'
   },
 
-  plugins: [
-    new webpack.optimize.DedupePlugin()
-  ],
-
-  eslint: {
-      failOnWarning: false,
-      failOnError: true,
-      configFile: './.eslintrc.js'
-  },
-
   resolve: {
-    extensions: ['', '.jsx', '.js']
+    extensions: ['.jsx', '.js']
   }
 };

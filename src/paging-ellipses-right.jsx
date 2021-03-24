@@ -7,7 +7,7 @@ export default class PagingEllipsesRight extends React.Component {
             return null;
         }
         return (
-            <li key={'paging-ellipses-right'}
+            <li key="paging-ellipses-right"
               className="paginate_button disabled"
             >
                 <a href="#" onClick={(e) => { e.preventDefault(); }}>...</a>

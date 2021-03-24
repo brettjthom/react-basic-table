@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { isArrayOfObjectsEqual } from './utils.js';
 import PagingMain from './paging-main';
 import filterTable from './filtering';
 import sortTable from './sorting';
-import classNames from 'classnames';
 
 export default class ReactBasicTable extends React.Component {
     constructor(props) {
@@ -36,9 +36,12 @@ export default class ReactBasicTable extends React.Component {
         if (this.state.sortedBy.column !== index) {
             this.setState({ sortedBy: { column: index, mode: 'Asc' } });
         } else {
-            this.setState({ sortedBy: {
-                column: index,
-                mode: this.state.sortedBy.mode === 'Asc' ? 'Desc' : 'Asc' } });
+            this.setState({
+                sortedBy: {
+                    column: index,
+                    mode: this.state.sortedBy.mode === 'Asc' ? 'Desc' : 'Asc',
+                },
+            });
         }
     }
 
@@ -84,12 +87,13 @@ export default class ReactBasicTable extends React.Component {
             });
 
         if (rows.length === 0) {
-            rows =
-                (<tr key={"rowempty"}>
+            rows = (
+                <tr key="rowempty">
                     <td colSpan={headers.length} className="dataTables_empty">
                         No matching records found.
                     </td>
-                </tr>);
+                </tr>
+            );
         }
 
         return (

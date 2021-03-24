@@ -14,9 +14,10 @@ export default class PagingMain extends React.Component {
 
         this.setPage = this.props.setPage.bind(this);
     }
+
     render() {
         let i = 1;
-        let pagingNumbers = [];
+        const pagingNumbers = [];
 
         // Create individual numbers
         for (i = this.props.page - 2; i <= this.props.page + 2; i++) {
@@ -30,7 +31,7 @@ export default class PagingMain extends React.Component {
                   index={i}
                   numPages={this.props.numPages}
                   setPage={this.setPage}
-                />
+                />,
             );
         }
 

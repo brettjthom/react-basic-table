@@ -16,14 +16,14 @@ export default function filterTable(rows, criterias, filterFunction, mode) {
         return rows.filter((row) => {
             const criteriasMeant = filteredCriterias.filter((criteria) => {
                 return row[criteria.id]
-                        .props['data-ReactBasicTable-value']
-                        .toLowerCase()
-                        .indexOf(criteria.match.toLowerCase()) !== -1;
+                    .props['data-ReactBasicTable-value']
+                    .toLowerCase()
+                    .indexOf(criteria.match.toLowerCase()) !== -1;
             });
             return criteriasMeant.length >= (mode === 'And' ? filteredCriterias.length : 1);
         });
     // Using advanced filtering with a function
-    } else if (mode === 'Function') {
+    } if (mode === 'Function') {
         return rows.filter((row) => {
             const values = row.map((item) => {
                 return item.props['data-ReactBasicTable-value'];

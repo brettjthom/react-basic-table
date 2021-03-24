@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import ReactBasicTable from '../src/index';
@@ -11,6 +11,9 @@ import PagingFirst from '../src/paging-first';
 import PagingLast from '../src/paging-last';
 import PagingEllipsesLeft from '../src/paging-ellipses-left';
 import PagingEllipsesRight from '../src/paging-ellipses-right';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 const columns = ['Col1', 'Col2', 'Col3'];
 const rows = [

@@ -1,48 +1,34 @@
-var webpack = require('webpack');
+module.exports = (env) => {  
+  // Options for Builds
+  var buildVar = env.var;
+  var minify = env.mini;
 
-// Options for Builds
-var buildVar = process.argv.indexOf('-var') > -1;
-var minify = process.argv.indexOf('-p') > -1;
-
-// Different build types
-var outputName = 'lib/react-basic-table';
-outputName = outputName + (buildVar ? '-var' : '');
-outputName = outputName + (minify ? '.min.js' : '.js');
-
-
-var plugins = [
-  new webpack.optimize.DedupePlugin()
-]
-if (minify) plugins.push(new webpack.optimize.UglifyJsPlugin()); 
+  // Different build types
+  var outputName = 'react-basic-table';
+  outputName = outputName + (buildVar ? '-var' : '');
+  outputName = outputName + (minify ? '.min.js' : '.js');
 
 
-module.exports = {
-  entry: './src/index.jsx',
+  return {
+    entry: './src/index.jsx',
 
-  module: {
-    preLoaders: [
-      { test: /\.jsx?$/, include: /src/, loaders: ['eslint?{fix:true}']}
-    ],
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' }
-    ]
-  },
+    module: {
+      rules: [
+        //{ enforce:'pre', test: /\.jsx?$/, include: /src/, use: { loader : 'eslint-loader', options: { fix: true } }},
+        { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' }
+      ]
+    },
 
-  output: {
-    filename: outputName,
-    libraryTarget: buildVar ? 'var' : 'umd',
-    library: 'ReactBasicTable'
-  },
+    output: {
+      filename: outputName,
+      libraryTarget: buildVar ? 'var' : 'umd',
+      library: 'ReactBasicTable'
+    },
+    
+    mode: minify ? 'production' : 'development',
 
-  plugins: plugins,
-
-  eslint: {
-      failOnWarning: false,
-      failOnError: true,
-      configFile: './.eslintrc.js'
-  },
-
-  resolve: {
-    extensions: ['', '.jsx', '.js']
+    resolve: {
+      extensions: ['.jsx', '.js']
+    }
   }
 };

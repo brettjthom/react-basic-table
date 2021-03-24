@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import PagingMain from '../src/paging-main';
@@ -10,6 +10,9 @@ import PagingFirst from '../src/paging-first';
 import PagingLast from '../src/paging-last';
 import PagingEllipsesLeft from '../src/paging-ellipses-left';
 import PagingEllipsesRight from '../src/paging-ellipses-right';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 test('PagingMain renders the PagingNext', () => {
   const element = mount(

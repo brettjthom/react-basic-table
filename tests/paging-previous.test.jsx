@@ -1,8 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import PagingPrevious from '../src/paging-previous';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 test('PagingPrevious calls the set page prop', () => {
   const onClick = sinon.spy();

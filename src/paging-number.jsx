@@ -13,6 +13,7 @@ export default class PagingNumber extends React.Component {
         this.props.setPage(page);
         e.preventDefault();
     }
+
     render() {
         const numberClassName = classNames('paginate_button', 'paging-number',
             { disabled: this.props.page === this.props.index });

@@ -1,9 +1,12 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import PagingLast from '../src/paging-last';
 import PagingNumber from '../src/paging-number';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 test('PagingLast through a prop to PagingNumber calls set page', () => {
   const onClick = sinon.spy();

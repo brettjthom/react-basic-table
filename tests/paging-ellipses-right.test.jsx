@@ -1,7 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import { expect } from 'chai';
 import PagingEllipsesRight from '../src/paging-ellipses-right';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 test('PagingEllipsesRight shows if more than 3 pages before end', () => {
   let element = mount(

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import ReactBasicTable from '../lib/react-basic-table';
+import ReactBasicTable from '../dist/react-basic-table';
 import Chance from 'chance';
 
 const chance = new Chance();
