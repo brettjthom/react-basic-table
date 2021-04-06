@@ -54,7 +54,19 @@ test('PagingLast does not render with no page', () => {
   );
   expect(element.isEmptyRender()).to.equal(true);
   element = mount(
+    <PagingLast page={2} numPages={2} setPage={onClick} />
+  );
+  expect(element.isEmptyRender()).to.equal(false);
+});
+
+test('PagingLast does not render with one page', () => {
+  const onClick = sinon.spy();
+  let element = mount(
     <PagingLast page={1} numPages={1} setPage={onClick} />
+  );
+  expect(element.isEmptyRender()).to.equal(true);
+  element = mount(
+    <PagingLast page={2} numPages={2} setPage={onClick} />
   );
   expect(element.isEmptyRender()).to.equal(false);
 });

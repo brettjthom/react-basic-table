@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,15 +17,22 @@ export default class ReactBasicTable extends React.Component {
     this.state = {
       page: 1,
       sortedBy: {},
+      previousFilter: [],
     };
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { filter } = this.props;
+  static getDerivedStateFromProps(props, state) {
+    const { filter } = props;
+    const { previousFilter } = state;
     // New filter... reset to page 1
-    if (!isArrayOfObjectsEqual(filter, nextProps.filter)) {
-      this.setState({ page: 1 });
+    if (!isArrayOfObjectsEqual(previousFilter, filter)) {
+      return {
+        page: 1,
+        previousFilter: props.filter,
+      };
     }
+
+    return null;
   }
 
   setPage(newPage) {

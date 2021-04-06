@@ -16,7 +16,7 @@ export default class PagingLast extends React.Component {
   render() {
     const { numPages, page } = this.props;
 
-    if (numPages === 0) return null;
+    if (numPages === 0 || numPages === 1) return null;
     return (
       <PagingNumber
         key={numPages}
