@@ -1,144 +1,158 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isArrayOfObjectsEqual } from './utils.js';
+import isArrayOfObjectsEqual from './utils/isArrayOfObjectsEqual';
 import PagingMain from './paging-main';
 import filterTable from './filtering';
 import sortTable from './sorting';
 
 export default class ReactBasicTable extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            page: 1,
-            numPages: 1,
-            sortedBy: {},
-        };
+  constructor(props) {
+    super(props);
+
+    this._setPage = this.setPage.bind(this);
+
+    this.state = {
+      page: 1,
+      sortedBy: {},
+    };
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { filter } = this.props;
+    // New filter... reset to page 1
+    if (!isArrayOfObjectsEqual(filter, nextProps.filter)) {
+      this.setState({ page: 1 });
+    }
+  }
+
+  setPage(newPage) {
+    this.setState({ page: newPage });
+  }
+
+  sortColumn(index) {
+    // if column is not a sortable column... return
+    const { sort } = this.props;
+    const { sortedBy } = this.state;
+    if (sort.indexOf(index) === -1) {
+      return;
     }
 
-    componentWillReceiveProps(nextProps) {
-        // New filter... reset to page 1
-        if (!isArrayOfObjectsEqual(this.props.filter, nextProps.filter)) {
-            this.setState({ page: 1 });
-        }
+    if (sortedBy.column !== index) {
+      this.setState({ sortedBy: { column: index, mode: 'Asc' } });
+    } else {
+      this.setState({
+        sortedBy: {
+          column: index,
+          mode: sortedBy.mode === 'Asc' ? 'Desc' : 'Asc',
+        },
+      });
     }
+  }
 
-    setPage(newPage) {
-        this.setState({ page: newPage });
-    }
+  render() {
+    const {
+      rows, columns, hideColumns, filter, filterFunction, filterMode, pageSize,
+    } = this.props;
+    const { page, sortedBy } = this.state;
 
-    sortColumn(index) {
-        // if column is not a sortable column... return
-        if (this.props.sort.indexOf(index) === -1) {
-            return;
-        }
+    const headers = columns.map((header, index) => {
+      const hideColumn = hideColumns.indexOf(index) !== -1;
+      return (
+        <th
+          key={`header${index}`}
+          className={classNames({ hidden: hideColumn })}
+          style={hideColumn ? { display: 'none' } : {}}
+          onClick={this.sortColumn.bind(this, index)}
+        >
+          {header}
+        </th>
+      );
+    });
 
-        if (this.state.sortedBy.column !== index) {
-            this.setState({ sortedBy: { column: index, mode: 'Asc' } });
-        } else {
-            this.setState({
-                sortedBy: {
-                    column: index,
-                    mode: this.state.sortedBy.mode === 'Asc' ? 'Desc' : 'Asc',
-                },
-            });
-        }
-    }
-
-    render() {
-        const headers = this.props.columns.map((header, index) => {
-            const hideColumn = this.props.hideColumns.indexOf(index) !== -1;
-            return (
-                <th key={`header${index}`}
-                  className={classNames({ hidden: hideColumn })}
-                  style={hideColumn ? { display: 'none' } : {}}
-                  onClick={this.sortColumn.bind(this, index)}
-                >
-                    {header}
-                </th>
-            );
+    // Filter/Sort the rows for the final render
+    const filteredRows = filterTable(rows,
+      filter,
+      filterFunction,
+      filterMode);
+    let rowElements = sortTable(filteredRows, sortedBy)
+      .slice((page - 1) * pageSize,
+        page * pageSize)
+      .map((row, index) => {
+        const items = row.map((td, tdIndex) => {
+          const hideColumn = hideColumns.indexOf(tdIndex) !== -1;
+          return (
+            <td
+              key={`row${index}item${tdIndex}`}
+              className={classNames({ hidden: hideColumn })}
+              style={hideColumn ? { display: 'none' } : {}}
+            >
+              {td}
+            </td>
+          );
         });
-
-        // Filter/Sort the rows for the final render
-        const filteredRows = filterTable(this.props.rows,
-            this.props.filter,
-            this.props.filterFunction,
-            this.props.filterMode);
-        let rows = sortTable(filteredRows, this.state.sortedBy)
-            .slice((this.state.page - 1) * this.props.pageSize,
-                this.state.page * this.props.pageSize)
-            .map((row, index) => {
-                const items = row.map((td, tdIndex) => {
-                    const hideColumn = this.props.hideColumns.indexOf(tdIndex) !== -1;
-                    return (
-                        <td key={`row${index}item${tdIndex}`}
-                          className={classNames({ hidden: hideColumn })}
-                          style={hideColumn ? { display: 'none' } : {}}
-                        >
-                            {td}
-                        </td>
-                    );
-                });
-                return (
-                    <tr key={`row${index}`}>
-                        {items}
-                    </tr>
-                );
-            });
-
-        if (rows.length === 0) {
-            rows = (
-                <tr key="rowempty">
-                    <td colSpan={headers.length} className="dataTables_empty">
-                        No matching records found.
-                    </td>
-                </tr>
-            );
-        }
-
         return (
-            <div>
-                <div className="row">
-                    <div className="col-xs-12">
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    {headers}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {rows}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <PagingMain page={this.state.page}
-                  numPages={Math.ceil(filteredRows.length / this.props.pageSize)}
-                  setPage={this.setPage.bind(this)}
-                />
-            </div>
+          <tr key={`row${index}`}>
+            {items}
+          </tr>
         );
+      });
+
+    if (rowElements.length === 0) {
+      rowElements = (
+        <tr key="rowempty">
+          <td colSpan={headers.length} className="dataTables_empty">
+            No matching records found.
+          </td>
+        </tr>
+      );
     }
+
+    return (
+      <div>
+        <div className="row">
+          <div className="col-xs-12">
+            <table className="table">
+              <thead>
+                <tr>
+                  {headers}
+                </tr>
+              </thead>
+              <tbody>
+                {rowElements}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <PagingMain
+          page={page}
+          numPages={Math.ceil(filteredRows.length / pageSize)}
+          setPage={this._setPage}
+        />
+      </div>
+    );
+  }
 }
 
 ReactBasicTable.defaultProps = {
-    rows: [],
-    columns: [],
-    pageSize: 10,
-    hideColumns: [],
-    filter: [],
-    sort: [],
-    filterMode: 'Or',
-    filterFunction: () => {},
+  rows: [],
+  columns: [],
+  pageSize: 10,
+  hideColumns: [],
+  filter: [],
+  sort: [],
+  filterMode: 'Or',
+  filterFunction: () => {},
 };
 
 ReactBasicTable.propTypes = {
-    rows: PropTypes.array,
-    columns: PropTypes.array,
-    pageSize: PropTypes.number,
-    hideColumns: PropTypes.array,
-    filter: PropTypes.array,
-    sort: PropTypes.array,
-    filterMode: PropTypes.string,
-    filterFunction: PropTypes.func,
+  rows: PropTypes.arrayOf(PropTypes.array),
+  columns: PropTypes.arrayOf(PropTypes.string),
+  pageSize: PropTypes.number,
+  hideColumns: PropTypes.arrayOf(PropTypes.number),
+  filter: PropTypes.PropTypes.arrayOf(PropTypes.object),
+  sort: PropTypes.arrayOf(PropTypes.number),
+  filterMode: PropTypes.string,
+  filterFunction: PropTypes.func,
 };

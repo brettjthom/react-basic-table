@@ -1,6 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
-import { isArrayOfObjectsEqual } from '../src/utils';
+import isArrayOfObjectsEqual from '../../src/utils/isArrayOfObjectsEqual';
 
 test('isArrayOfObjectsEqual detects properly if two arrays are not equal', () => {
     const a = [

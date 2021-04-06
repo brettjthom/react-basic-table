@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import PagingNext from './paging-next';
@@ -9,75 +10,85 @@ import PagingEllipsesLeft from './paging-ellipses-left';
 import PagingEllipsesRight from './paging-ellipses-right';
 
 export default class PagingMain extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.setPage = this.props.setPage.bind(this);
-    }
+    const { setPage } = this.props;
 
-    render() {
-        let i = 1;
-        const pagingNumbers = [];
+    this._setPage = setPage.bind(this);
 
-        // Create individual numbers
-        for (i = this.props.page - 2; i <= this.props.page + 2; i++) {
-            if (i < 2 || i > this.props.numPages - 1) {
-                continue;
-            }
+    this.state = {};
+  }
 
-            pagingNumbers.push(
-                <PagingNumber key={i}
-                  page={this.props.page}
-                  index={i}
-                  numPages={this.props.numPages}
-                  setPage={this.setPage}
-                />,
-            );
-        }
+  render() {
+    const { page, numPages } = this.props;
 
-        return (
-            <div className="row">
-                <div className="col-xs-12">
-                    <div className="dataTables_paginate paging_simple_numbers">
-                        <ul className="pagination">
-                            <PagingPrevious page={this.props.page}
-                              numPages={this.props.numPages}
-                              setPage={this.setPage}
-                            />
-                            <PagingFirst page={this.props.page}
-                              numPages={this.props.numPages}
-                              setPage={this.setPage}
-                            />
-                            <PagingEllipsesLeft page={this.props.page}
-                              numPages={this.props.numPages}
-                            />
-                            {pagingNumbers}
-                            <PagingEllipsesRight page={this.props.page}
-                              numPages={this.props.numPages}
-                            />
-                            <PagingLast page={this.props.page}
-                              numPages={this.props.numPages}
-                              setPage={this.setPage}
-                            />
-                            <PagingNext page={this.props.page}
-                              numPages={this.props.numPages}
-                              setPage={this.setPage}
-                            />
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    let i = 1;
+    const pagingNumbers = [];
+
+    // Create individual numbers
+    for (i = page - 2; i <= page + 2; i += 1) {
+      if (!(i < 2 || i > numPages - 1)) {
+        pagingNumbers.push(
+          <PagingNumber
+            key={i}
+            page={page}
+            index={i}
+            numPages={numPages}
+            setPage={this._setPage}
+          />,
         );
+      }
     }
+
+    return (
+      <div className="row">
+        <div className="col-xs-12">
+          <div className="dataTables_paginate paging_simple_numbers">
+            <ul className="pagination">
+              <PagingPrevious
+                page={page}
+                numPages={numPages}
+                setPage={this._setPage}
+              />
+              <PagingFirst
+                page={page}
+                numPages={numPages}
+                setPage={this._setPage}
+              />
+              <PagingEllipsesLeft
+                page={page}
+              />
+              {pagingNumbers}
+              <PagingEllipsesRight
+                page={page}
+                numPages={numPages}
+              />
+              <PagingLast
+                page={page}
+                numPages={numPages}
+                setPage={this._setPage}
+              />
+              <PagingNext
+                page={page}
+                numPages={numPages}
+                setPage={this._setPage}
+              />
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 PagingMain.defaultProps = {
-    page: 1,
-    numPages: 1,
-    setPage: { function() {} },
+  page: 1,
+  numPages: 1,
+  setPage: { function() {} },
 };
 PagingMain.propTypes = {
-    page: PropTypes.number,
-    numPages: PropTypes.number,
-    setPage: PropTypes.func,
+  page: PropTypes.number,
+  numPages: PropTypes.number,
+  setPage: PropTypes.func,
 };

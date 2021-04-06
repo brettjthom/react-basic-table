@@ -14,7 +14,7 @@ module.exports = (env) => {
 
     module: {
       rules: [
-        //{ enforce:'pre', test: /\.jsx?$/, include: /src/, use: { loader : 'eslint-loader', options: { fix: true } }},
+        { enforce:'pre', test: /\.jsx?$/, include: /src/, use: 'eslint-loader' },
         { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' }
       ]
     },
@@ -24,7 +24,6 @@ module.exports = (env) => {
       libraryTarget: buildVar ? 'var' : 'umd',
       library: 'ReactBasicTable'
     },
-    
     mode: minify ? 'production' : 'development',
 
     resolve: {

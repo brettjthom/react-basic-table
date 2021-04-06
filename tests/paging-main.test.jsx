@@ -134,7 +134,6 @@ test('PagingMain renders a PagingEllipsesLeft with the proper props', () => {
     <PagingMain page={5} numPages={100} setPage={() => {}} />
   );
   expect(element.find(PagingEllipsesLeft).props().page).to.equal(5);
-  expect(element.find(PagingEllipsesLeft).props().numPages).to.equal(100);
 });
 
 test('PagingMain renders the PagingEllipsesRight', () => {
