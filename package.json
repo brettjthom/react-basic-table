@@ -9,7 +9,7 @@
     "natsort": "^1.0.6"
   },
   "devDependencies": {
-    "babel": "^5.8.23",
+    "babel": "^6.23.0",
     "babel-core": "^6.13.2",
     "babel-jest": "^20.0.3",
     "babel-loader": "^6.2.4",
